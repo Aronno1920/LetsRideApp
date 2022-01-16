@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_baseline_bedtime_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/credit"
+        android:icon="@drawable/ic_baseline_architecture_24"
+        android:title="Credit" />
+
+    <item
+        android:id="@+id/placeholder"
+        android:title="" />
+
+    <item
+        android:id="@+id/routes"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Routes" />
+
+    <item
+        android:id="@+id/Settings"
+        android:icon="@drawable/ic_baseline_person_search_24"
+        android:title="Settings" />
+
+</menu>

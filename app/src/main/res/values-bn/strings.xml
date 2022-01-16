@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">লেটস রাইড</string>
+
+    <string name="next">পরবর্তী</string>
+    <string name="skip">বাতিল</string>
+    <string name="start">ঠিক আছে</string>
+
+    <string name="slide_1_title">হেলো ফুড!</string>
+    <string name="slide_1_desc">The easiest way to order food from your favourite restaurant!</string>
+
+    <string name="slide_2_title">মুভি টিকেটস</string>
+    <string name="slide_2_desc">Book movie tickets for your family and friends!</string>
+
+    <string name="slide_3_title">মূল্য ছাড়</string>
+    <string name="slide_3_desc">Best discounts on every single service we offer!</string>
+
+    <string name="slide_4_title">বিশ্ব ভ্রমণ</string>
+    <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+    <!-- TODO: Login Screen -->
+    <string name="level_mobile_prefix">+৮৮০</string>
+    <string name="level_mobile_number">মোবাইল নম্বর</string>
+    <string name="level_NewUser">নতুন ব্যাবহারকারি?</string>
+    <string name="level_SignUp">সাইন আপ</string>
+    <string name="level_Forget">ভুলে গেছেন?</string>
+    <string name="level_Password">পাসওয়ার্ড</string>
+    <string name="level_Contineu_With">অথবা চালিয়ে যান</string>
+
+    <!-- TODO: Registration Screen -->
+    <string name="level_first_name">নামের প্রথম অংশ</string>
+    <string name="level_last_name">নামের শেষাংশ</string>
+    <string name="level_email_address">ইমেইল এড্রেস</string>
+
+    <!-- TODO: Verification Screen -->
+    <string name="level_verify_message">Enter confirmation code sent to you on your sms</string>
+    <string name="level_verify_button">Verify</string>
+    <string name="large_text"></string>
+</resources>
