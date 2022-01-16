@@ -18,9 +18,6 @@
     <string name="slide_4_title">বিশ্ব ভ্রমণ</string>
     <string name="slide_4_desc">Book tickets of any transportation and travel the world!</string>
 
-    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
-    <string name="play_again">Play Again</string>
-
     <!-- TODO: Login Screen -->
     <string name="level_mobile_prefix">+৮৮০</string>
     <string name="level_mobile_number">মোবাইল নম্বর</string>

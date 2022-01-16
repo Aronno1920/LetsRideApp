@@ -21,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         session = new SessionManager(getApplicationContext());
 
-        //setApplicationFonts();
+        setApplicationFonts();
         setApplicationLocale();
     }
 
