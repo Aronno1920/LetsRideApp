@@ -19,7 +19,7 @@ public class BaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         session = new SessionManager(getActivity());
 
-        //setApplicationFonts();
+        setApplicationFonts();
         setApplicationLocale();
     }
 

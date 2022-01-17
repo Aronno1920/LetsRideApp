@@ -14,7 +14,7 @@ import bd.com.letsride.user.R;
 import bd.com.letsride.user.utilities.BaseActivity;
 import bd.com.letsride.user.utilities.SessionManager;
 
-public class LanguageActivity extends AppCompatActivity {
+public class LanguageActivity extends BaseActivity {
 
     SessionManager session;
 
