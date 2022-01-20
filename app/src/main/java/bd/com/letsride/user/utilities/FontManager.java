@@ -23,10 +23,10 @@ public class FontManager {
 
     private FontManager(Context context) {
         AssetManager am = context.getResources().getAssets();
-        fontMap.put(Typeface.NORMAL, Typeface.createFromAsset(am, "fonts/CANDARA.TTF"));
-        fontMap.put(Typeface.BOLD, Typeface.createFromAsset(am, "fonts/CANDARAB.TTF"));
-        fontMap.put(Typeface.ITALIC, Typeface.createFromAsset(am, "fonts/CANDARAI.TTF"));
-        fontMap.put(Typeface.BOLD_ITALIC, Typeface.createFromAsset(am, "fonts/CANDARAZ.TTF"));
+        fontMap.put(Typeface.NORMAL, Typeface.createFromAsset(am, "fonts/ubuntu_regular.ttf"));
+        fontMap.put(Typeface.BOLD, Typeface.createFromAsset(am, "fonts/ubuntu_bold.ttf"));
+        fontMap.put(Typeface.ITALIC, Typeface.createFromAsset(am, "fonts/ubuntu_italic.ttf"));
+        fontMap.put(Typeface.BOLD_ITALIC, Typeface.createFromAsset(am, "fonts/ubuntu_bold_italic.ttf"));
     }
 
     public void replaceFonts(ViewGroup viewTree) {

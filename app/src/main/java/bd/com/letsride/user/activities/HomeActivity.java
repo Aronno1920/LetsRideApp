@@ -28,7 +28,7 @@ public class HomeActivity extends BaseActivity {
         initializeUI();
         registerActions();
 
-        loadFragment(DashboardFragment.newInstance("", ""));
+        loadFragment(new DashboardFragment());
     }
 
     private void registerActions() {
@@ -37,13 +37,13 @@ public class HomeActivity extends BaseActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        loadFragment(DashboardFragment.newInstance("", ""));
+                        loadFragment(new DashboardFragment());
                         break;
                     case R.id.credit:
-                        loadFragment(CreditFragment.newInstance("", ""));
+                        loadFragment(new CreditFragment());
                         break;
                     case R.id.routes:
-                        loadFragment(RoutesFragment.newInstance("", ""));
+                        loadFragment(new RoutesFragment());
                         break;
                 }
                 return true;

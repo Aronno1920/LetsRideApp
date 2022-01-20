@@ -13,7 +13,7 @@
         <activity
             android:name=".activities.HomeActivity"
             android:exported="false"
-            android:label="Lets Ride" />
+            android:label="Let's Ride" />
         <activity
             android:name=".activities.LanguageActivity"
             android:exported="false"

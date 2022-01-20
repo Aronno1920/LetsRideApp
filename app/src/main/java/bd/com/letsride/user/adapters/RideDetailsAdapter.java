@@ -1,11 +1,14 @@
 package bd.com.letsride.user.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import bd.com.letsride.user.R;
@@ -14,81 +17,52 @@ import bd.com.letsride.user.models.RideDetailsModel;
 public class RideDetailsAdapter extends RecyclerView.Adapter<RideDetailsAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<RideDetailsAdapter> albumList;
+    private List<RideDetailsModel> myRideList = new ArrayList<RideDetailsModel>();
+
+    public RideDetailsAdapter(Context mContext, List<RideDetailsModel> rideList) {
+        this.mContext = mContext;
+        this.myRideList = rideList;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
+        public TextView txtZoneName, txtRideDate, txtRideTime, txtRidePrice, txtDriverName;
 
         public MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
-            count = (TextView) view.findViewById(R.id.count);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+            txtZoneName = (TextView) view.findViewById(R.id.TextView_ZoneName);
+            txtRideDate = (TextView) view.findViewById(R.id.TextView_RideDate);
+            txtRideTime = (TextView) view.findViewById(R.id.TextView_RideTime);
+            txtRidePrice = (TextView) view.findViewById(R.id.TextView_RidePrice);
+            txtDriverName = (TextView) view.findViewById(R.id.TextView_DriverName);
         }
-    }
-
-
-    public RideDetailsAdapter(Context mContext, List<RideDetailsAdapter> albumList) {
-        this.mContext = mContext;
-        this.albumList = albumList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_card, parent, false);
-
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_ride_details, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Album album = albumList.get(position);
-        holder.title.setText(album.getName());
-        holder.count.setText(album.getNumOfSongs() + " songs");
+        Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "fonts/Ubuntu-Regular.TTF");
+        RideDetailsModel myRide = myRideList.get(position);
 
-        // loading album cover using Glide library
-        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+        holder.txtZoneName.setText(myRide.getZoneName());
+        holder.txtRideDate.setText(myRide.getRideDate());
+        holder.txtRideTime.setText(myRide.getRideTime());
+        holder.txtRidePrice.setText(myRide.getRidePrice());
+        holder.txtDriverName.setText(myRide.getDriverName());
 
-        holder.overflow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(holder.overflow);
-            }
-        });
+        holder.txtZoneName.setTypeface(custom_font);
+        holder.txtRideDate.setTypeface(custom_font);
+        holder.txtRideTime.setTypeface(custom_font);
+        holder.txtRidePrice.setTypeface(custom_font);
+        holder.txtDriverName.setTypeface(custom_font);
     }
-
-    /**
-     * Showing popup menu when tapping on 3 dots
-     */
-//
-
-    /**
-     * Click listener for popup menu items
-     */
-//    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-//
-//        public MyMenuItemClickListener() {
-//        }
-//
-//        @Override
-//        public boolean onMenuItemClick(MenuItem menuItem) {
-//            switch (menuItem.getItemId()) {
-//                case R.id.action_add_favourite:
-//                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-//                    return true;
-//                case R.id.action_play_next:
-//                    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
-//                    return true;
-//                default:
-//            }
-//            return false;
-//        }
-//    }
 
     @Override
     public int getItemCount() {
-        return albumList.size();
+        return myRideList.size();
     }
 }
