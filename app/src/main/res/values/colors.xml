@@ -2,6 +2,9 @@
 <resources>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="floting_background">#5cb85c</color>
+    <color name="floting_icon">#FFFFFFFF</color>
+
     <!-- Screens background color-->
     <color name="bg_screen1">#f64c73</color>
     <color name="bg_screen2">#20d2bb</color>

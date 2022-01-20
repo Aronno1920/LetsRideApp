@@ -16,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Varification Code"
+        android:lines="1"
+        android:inputType="number"
         android:background="@drawable/style_edittext"></EditText>
 
     <Button

@@ -41,7 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_booking"
+            android:src="@drawable/ic_car_booking"
+            app:maxImageSize="40dp"
+            android:theme="@style/MyFloatingActionButton"
             app:layout_anchor="@id/bottomAppBar" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

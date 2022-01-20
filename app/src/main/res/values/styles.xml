@@ -5,4 +5,10 @@
         <item name="colorPrimaryVariant">#0F9D58</item>
         <item name="colorOnPrimary">#000</item>
     </style>
+
+    <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="colorSecondary">@color/floting_background</item>
+        <item name="colorOnSecondary">@color/floting_icon</item>
+    </style>
+
 </resources>
