@@ -1,6 +1,6 @@
 package bd.com.letsride.user.models;
 
-public class RideDetailsModel {
+public class RideUpcomingModel {
 
     private String ZoneName;
     private String RideDate;
@@ -8,7 +8,7 @@ public class RideDetailsModel {
     private String RidePrice;
     private String DriverName;
 
-    public RideDetailsModel(String zoneName, String rideDate, String rideTime, String ridePrice, String driverName) {
+    public RideUpcomingModel(String zoneName, String rideDate, String rideTime, String ridePrice, String driverName) {
         ZoneName = zoneName;
         RideDate = rideDate;
         RideTime = rideTime;

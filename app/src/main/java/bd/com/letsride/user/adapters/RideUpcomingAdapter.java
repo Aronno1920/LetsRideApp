@@ -1,7 +1,6 @@
 package bd.com.letsride.user.adapters;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bd.com.letsride.user.R;
-import bd.com.letsride.user.models.RideDetailsModel;
+import bd.com.letsride.user.models.RideUpcomingModel;
 
-public class RideDetailsAdapter extends RecyclerView.Adapter<RideDetailsAdapter.MyViewHolder> {
+public class RideUpcomingAdapter extends RecyclerView.Adapter<RideUpcomingAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<RideDetailsModel> myRideList = new ArrayList<RideDetailsModel>();
+    private List<RideUpcomingModel> myRideList = new ArrayList<RideUpcomingModel>();
 
-    public RideDetailsAdapter(Context mContext, List<RideDetailsModel> rideList) {
+    public RideUpcomingAdapter(Context mContext, List<RideUpcomingModel> rideList) {
         this.mContext = mContext;
         this.myRideList = rideList;
     }
@@ -45,8 +44,8 @@ public class RideDetailsAdapter extends RecyclerView.Adapter<RideDetailsAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "fonts/Ubuntu-Regular.TTF");
-        RideDetailsModel myRide = myRideList.get(position);
+        //Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "fonts/Ubuntu-Regular.TTF");
+        RideUpcomingModel myRide = myRideList.get(position);
 
         holder.txtZoneName.setText(myRide.getZoneName());
         holder.txtRideDate.setText(myRide.getRideDate());
@@ -54,11 +53,11 @@ public class RideDetailsAdapter extends RecyclerView.Adapter<RideDetailsAdapter.
         holder.txtRidePrice.setText(myRide.getRidePrice());
         holder.txtDriverName.setText(myRide.getDriverName());
 
-        holder.txtZoneName.setTypeface(custom_font);
-        holder.txtRideDate.setTypeface(custom_font);
-        holder.txtRideTime.setTypeface(custom_font);
-        holder.txtRidePrice.setTypeface(custom_font);
-        holder.txtDriverName.setTypeface(custom_font);
+//        holder.txtZoneName.setTypeface(custom_font);
+//        holder.txtRideDate.setTypeface(custom_font);
+//        holder.txtRideTime.setTypeface(custom_font);
+//        holder.txtRidePrice.setTypeface(custom_font);
+//        holder.txtDriverName.setTypeface(custom_font);
     }
 
     @Override

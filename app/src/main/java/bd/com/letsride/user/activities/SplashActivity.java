@@ -17,7 +17,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        //getSupportActionBar().hide();
         setContentView(R.layout.activity_splash);
         session = new SessionManager(getApplicationContext());
 
@@ -29,17 +28,20 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
 
-                    if(session.IsSetLanguage()==false){
-                        Intent login = new Intent(SplashActivity.this, LanguageActivity.class);
-                        startActivity(login);
-                    }
-                    else if (CheckUserLoginStatus()) {
-                        Intent login = new Intent(SplashActivity.this, LoginActivity.class);
-                        startActivity(login);
-                    } else {
-                        Intent login = new Intent(SplashActivity.this, LanguageActivity.class);
-                        startActivity(login);
-                    }
+//                    if(session.IsSetLanguage()==false){
+//                        Intent login = new Intent(SplashActivity.this, LanguageActivity.class);
+//                        startActivity(login);
+//                    }
+//                    else if (CheckUserLoginStatus()) {
+//                        Intent login = new Intent(SplashActivity.this, LoginActivity.class);
+//                        startActivity(login);
+//                    } else {
+//                        Intent login = new Intent(SplashActivity.this, LanguageActivity.class);
+//                        startActivity(login);
+//                    }
+
+                    Intent login = new Intent(SplashActivity.this, HomeActivity.class);
+                    startActivity(login);
                 }
             }
         };
