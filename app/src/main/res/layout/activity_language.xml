@@ -24,6 +24,7 @@
                 android:textColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/style_buttom"
                 android:text="Bangla"/>
         </LinearLayout>
         <LinearLayout
@@ -36,6 +37,7 @@
                 android:textColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/style_buttom"
                 android:text="English"/>
         </LinearLayout>
     </LinearLayout>

@@ -15,10 +15,11 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="Varification Code"
         android:lines="1"
         android:inputType="number"
-        android:background="@drawable/style_edittext"></EditText>
+        android:background="@drawable/style_edittext" />
 
     <Button
         android:id="@+id/Button_Verify"

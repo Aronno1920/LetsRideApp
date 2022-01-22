@@ -74,19 +74,21 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textAllCaps="false"
-                    android:text="Cancle Ride"></TextView>
+                    android:text="Cancle Ride" />
                 <Space
                     android:layout_width="100dp"
                     android:layout_height="match_parent"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
-                    android:text="Call Manager"></TextView>
+                    android:text="Call Manager" />
             </LinearLayout>
 
         </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,11 +31,13 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txtAmount, txtBonus;
+        LinearLayout layoutContainerCredit;
 
         public MyViewHolder(View view) {
             super(view);
             txtAmount = (TextView) view.findViewById(R.id.TextView_CreditAmount);
             txtBonus = (TextView) view.findViewById(R.id.TextView_BonusAmount);
+            layoutContainerCredit = (LinearLayout) view.findViewById(R.id.layoutContainerCredit);
         }
     }
 
@@ -53,7 +56,7 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
             holder.txtBonus.setText("Bonus BDT. "+aCredit.getBonusAmount());
         }
 
-        holder.txtAmount.setOnClickListener(new View.OnClickListener() {
+        holder.layoutContainerCredit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CreditPurchaseButtomSheet bottomSheet = new CreditPurchaseButtomSheet();

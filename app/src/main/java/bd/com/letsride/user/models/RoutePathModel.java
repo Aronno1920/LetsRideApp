@@ -1,10 +1,10 @@
 package bd.com.letsride.user.models;
 
-public class RoutePath {
+public class RoutePathModel {
     private Integer PathSerial;
     private String PathName;
 
-    public RoutePath(Integer pathSerial, String pathName) {
+    public RoutePathModel(Integer pathSerial, String pathName) {
         PathSerial = pathSerial;
         PathName = pathName;
     }

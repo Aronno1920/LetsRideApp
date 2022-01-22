@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:textStyle="bold"
             android:textSize="15dp"
-            android:text="₹435.00"></TextView>
+            android:text="₹435.00" />
     </LinearLayout>
 
 

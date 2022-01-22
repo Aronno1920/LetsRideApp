@@ -1,10 +1,10 @@
 package bd.com.letsride.user.models;
 
-public class RouteTime {
+public class RouteTimeModel {
 
     private String StartTime;
 
-    public RouteTime(String startTime) {
+    public RouteTimeModel(String startTime) {
         StartTime = startTime;
     }
 

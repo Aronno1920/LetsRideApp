@@ -58,7 +58,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/level_NewUser"></TextView>
+                android:text="@string/level_NewUser" />
 
             <TextView
                 android:id="@+id/TextView_SignUp"
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:textColor="@color/bg_screen2"
-                android:text="@string/level_SignUp"></TextView>
+                android:text="@string/level_SignUp" />
         </LinearLayout>
     </LinearLayout>
 

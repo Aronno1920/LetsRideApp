@@ -1,7 +1,8 @@
 package bd.com.letsride.user.activities;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,12 +13,15 @@ import bd.com.letsride.user.R;
 import bd.com.letsride.user.fragments.CreditFragment;
 import bd.com.letsride.user.fragments.DashboardFragment;
 import bd.com.letsride.user.fragments.RoutesFragment;
+import bd.com.letsride.user.fragments.SettingFragment;
+import bd.com.letsride.user.models.SettingMenuModel;
 import bd.com.letsride.user.utilities.BaseActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements SettingFragment.OnSettingsFragmentInteraction {
 
+    SettingMenuModel settingMenuModel;
     BottomNavigationView bottomNavigationView;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -44,6 +48,9 @@ public class HomeActivity extends BaseActivity {
                         break;
                     case R.id.routes:
                         loadFragment(new RoutesFragment());
+                        break;
+                    case R.id.settings:
+                        loadFragment(new SettingFragment());
                         break;
                 }
                 return true;
@@ -79,5 +86,68 @@ public class HomeActivity extends BaseActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+    @Override
+    public void onSettingsButtonClicked(SettingMenuModel settingMenuModel) {
+        this.settingMenuModel = settingMenuModel;
+
+        Integer selectedMenuId = settingMenuModel.getMenuId();
+
+        switch (selectedMenuId) {
+            case 1: // Home
+                loadFragment(new DashboardFragment());
+                break;
+            case 2: // Profile
+                //showToast("TUESDAY");
+                break;
+            case 3: // My Offers
+                //showToast("WEDNESDAY");
+                break;
+            case 4: // Purchase Credit
+                loadFragment(new CreditFragment());
+                break;
+            case 5: // Monthly Package
+                //showToast("FRIDAY");
+                break;
+            case 6: // Available Routes
+                loadFragment(new RoutesFragment());
+                break;
+            case 7: // My Rides
+                //showToast("SUNDAY");
+                break;
+            case 8: // My Upcoming Rides
+                //showToast("SUNDAY");
+                break;
+            case 9: // My Transctions
+                //showToast("SUNDAY");
+                break;
+            case 10: // Customer Support
+                callCustomerCare();
+                break;
+            case 11: // Calll 999
+                callEmergencyNumber();
+                break;
+            case 12: // Policies
+                //showToast("SUNDAY");
+                break;
+            case 13: // Log out
+                //showToast("SUNDAY");
+                break;
+        }
+    }
+
+    private void callCustomerCare() {
+        String phone = "01821644177";
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + phone));
+        startActivity(callIntent);
+    }
+
+    private void callEmergencyNumber() {
+        String phone = "999";
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + phone));
+        startActivity(callIntent);
     }
 }

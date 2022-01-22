@@ -24,10 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_pickup"></ImageView>
+                android:src="@drawable/ic_pickup" />
             <TextView
                 android:id="@+id/TextView_Pickup_Zone"
                 android:textColor="@color/bg_screen2"
@@ -41,10 +42,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_dropoff"></ImageView>
+                android:src="@drawable/ic_dropoff" />
             <TextView
                 android:id="@+id/TextView_DropOff_Zone"
                 android:textColor="@color/bg_screen2"
