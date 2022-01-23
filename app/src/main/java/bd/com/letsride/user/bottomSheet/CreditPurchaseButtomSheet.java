@@ -8,11 +8,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
 import bd.com.letsride.user.R;
+import bd.com.letsride.user.utilities.BaseButtomSheetFragment;
 
-public class CreditPurchaseButtomSheet extends BottomSheetDialogFragment {
+public class CreditPurchaseButtomSheet extends BaseButtomSheetFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -20,13 +19,19 @@ public class CreditPurchaseButtomSheet extends BottomSheetDialogFragment {
         View v = inflater.inflate(R.layout.buttom_sheet_credit_purchase, container, false);
 
         Bundle bundle = getArguments();
-        String amount = bundle.getString("price", "Default");
-
+        Integer current = bundle.getInt("current_balance");
+        Integer recharge = bundle.getInt("recharge_balance");
 
         Button algo_button = v.findViewById(R.id.algo_button);
         Button course_button = v.findViewById(R.id.course_button);
-        TextView lblPrice = v.findViewById(R.id.button_sheet_price);
-        lblPrice.setText(amount);
+        TextView lblCurrent = v.findViewById(R.id.button_sheet_current_balance);
+        TextView lblRecharge = v.findViewById(R.id.button_sheet_recharge_balance);
+        TextView lblNew = v.findViewById(R.id.button_sheet_new_balance);
+
+        int newMyBalance = current+recharge;
+        lblCurrent.setText(current.toString());
+        lblRecharge.setText(recharge.toString());
+        lblNew.setText(newMyBalance);
 
         algo_button.setOnClickListener(new View.OnClickListener() {
             @Override

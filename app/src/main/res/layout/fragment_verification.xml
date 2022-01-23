@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/level_verify_button"
-        android:textColor="@color/white" />
+        android:textColor="@color/colorTextWhite" />
 
 </LinearLayout>

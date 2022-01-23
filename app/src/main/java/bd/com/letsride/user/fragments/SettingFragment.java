@@ -81,7 +81,7 @@ public class SettingFragment extends BaseFragment {
             mListener = (OnSettingsFragmentInteraction) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnSearchByPhotoIDFragmentListener");
+                    + " must implement OnSettingsFragmentInteraction");
         }
     }
 

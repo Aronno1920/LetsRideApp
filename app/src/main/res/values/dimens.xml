@@ -10,5 +10,6 @@
     <dimen name="desc_padding">40dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
-    <dimen name="card_ride_details_round">10dp</dimen>
+    <dimen name="card_ride_upcoming_round">10dp</dimen>
+    <dimen name="card_ride_upcoming_width">300dp</dimen>
 </resources>

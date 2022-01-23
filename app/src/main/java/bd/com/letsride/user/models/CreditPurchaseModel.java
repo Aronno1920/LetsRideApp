@@ -2,27 +2,27 @@ package bd.com.letsride.user.models;
 
 public class CreditPurchaseModel {
 
-    private String Amount;
-    private String BonusAmount;
+    private Integer Amount;
+    private Integer BonusAmount;
 
-    public CreditPurchaseModel(String amount, String bonusAmount) {
+    public CreditPurchaseModel(Integer amount, Integer bonusAmount) {
         Amount = amount;
         BonusAmount = bonusAmount;
     }
 
-    public String getAmount() {
+    public Integer getAmount() {
         return Amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Integer amount) {
         Amount = amount;
     }
 
-    public String getBonusAmount() {
+    public Integer getBonusAmount() {
         return BonusAmount;
     }
 
-    public void setBonusAmount(String bonusAmount) {
+    public void setBonusAmount(Integer bonusAmount) {
         BonusAmount = bonusAmount;
     }
 }

@@ -49,18 +49,18 @@ public class CreditFragment extends BaseFragment {
 
     public List<CreditPurchaseModel> GetAllCredits(){
         List<CreditPurchaseModel> cModel = new ArrayList<CreditPurchaseModel>();
-        cModel.add(new CreditPurchaseModel("100", "0"));
-        cModel.add(new CreditPurchaseModel("120", "0"));
-        cModel.add(new CreditPurchaseModel("130", "0"));
-        cModel.add(new CreditPurchaseModel("140", "0"));
-        cModel.add(new CreditPurchaseModel("150", "0"));
-        cModel.add(new CreditPurchaseModel("260", "0"));
-        cModel.add(new CreditPurchaseModel("500", "0"));
-        cModel.add(new CreditPurchaseModel("1000", "25"));
-        cModel.add(new CreditPurchaseModel("1500", "50"));
-        cModel.add(new CreditPurchaseModel("2000", "100"));
-        cModel.add(new CreditPurchaseModel("2500", "150"));
-        cModel.add(new CreditPurchaseModel("3000", "200"));
+        cModel.add(new CreditPurchaseModel(100, 0));
+        cModel.add(new CreditPurchaseModel(120, 0));
+        cModel.add(new CreditPurchaseModel(130, 0));
+        cModel.add(new CreditPurchaseModel(140, 0));
+        cModel.add(new CreditPurchaseModel(150, 0));
+        cModel.add(new CreditPurchaseModel(260, 0));
+        cModel.add(new CreditPurchaseModel(500, 0));
+        cModel.add(new CreditPurchaseModel(1000, 25));
+        cModel.add(new CreditPurchaseModel(1500, 50));
+        cModel.add(new CreditPurchaseModel(2000, 100));
+        cModel.add(new CreditPurchaseModel(2500, 150));
+        cModel.add(new CreditPurchaseModel(3000, 200));
 
         return cModel;
     }

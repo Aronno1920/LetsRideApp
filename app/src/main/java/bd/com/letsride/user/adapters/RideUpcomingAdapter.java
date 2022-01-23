@@ -1,6 +1,7 @@
 package bd.com.letsride.user.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,13 +39,14 @@ public class RideUpcomingAdapter extends RecyclerView.Adapter<RideUpcomingAdapte
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_ride_details, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_ride_upcoming, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        //Typeface custom_font = Typeface.createFromAsset(mContext.getAssets(), "fonts/Ubuntu-Regular.TTF");
+        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
+        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
         RideUpcomingModel myRide = myRideList.get(position);
 
         holder.txtZoneName.setText(myRide.getZoneName());
@@ -53,11 +55,11 @@ public class RideUpcomingAdapter extends RecyclerView.Adapter<RideUpcomingAdapte
         holder.txtRidePrice.setText(myRide.getRidePrice());
         holder.txtDriverName.setText(myRide.getDriverName());
 
-//        holder.txtZoneName.setTypeface(custom_font);
-//        holder.txtRideDate.setTypeface(custom_font);
-//        holder.txtRideTime.setTypeface(custom_font);
-//        holder.txtRidePrice.setTypeface(custom_font);
-//        holder.txtDriverName.setTypeface(custom_font);
+        holder.txtZoneName.setTypeface(font_bold);
+        holder.txtRideDate.setTypeface(font_normal);
+        holder.txtRideTime.setTypeface(font_normal);
+        holder.txtRidePrice.setTypeface(font_normal);
+        holder.txtDriverName.setTypeface(font_bold);
     }
 
     @Override

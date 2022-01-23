@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#005b96</color>
+    <color name="colorPrimaryVariant">#6497b1</color>
+    <color name="colorOnPrimary">#000</color>
 
-    <color name="floting_background">#5cb85c</color>
+    <color name="colorTextWhite">#FFFFFFFF</color>
+    <color name="colorTextBlue">#005b96</color>
+
+    <color name="floting_background">#005b96</color>
     <color name="floting_icon">#FFFFFFFF</color>
 
     <!-- Screens background color-->

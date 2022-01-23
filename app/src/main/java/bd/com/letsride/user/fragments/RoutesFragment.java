@@ -18,8 +18,9 @@ import bd.com.letsride.user.R;
 import bd.com.letsride.user.adapters.AvailableRouteAdapter;
 import bd.com.letsride.user.adapters.RideUpcomingAdapter;
 import bd.com.letsride.user.models.RouteModel;
+import bd.com.letsride.user.utilities.BaseFragment;
 
-public class RoutesFragment extends Fragment {
+public class RoutesFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private List<RouteModel> routeList;
@@ -52,18 +53,18 @@ public class RoutesFragment extends Fragment {
 
     public List<RouteModel> GetAllRoutes() {
         List<RouteModel> aRoute = new ArrayList<RouteModel>();
-        aRoute.add(new RouteModel("Mirpur 1", "Motijheeel", "Kalshi", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Mirpur 1", "Matijheel", "Agargaon", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Mirpur 130", "Dhanmondi 32", "ha", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Mirpur 140", "Dhanmondi 01", "adsf", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Mirpur 150", "Dhanmondi 05", "3ere", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Mirpur 260", "Dhanmondi 89", "twert", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Gulshan 500", "Uttara", "ywtr", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Uttara 1000", "Badda", "wert", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Uttara 1500", "Badda", "wert", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Uttara 2000", "Dhanmondi 25", "zxv", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Uttara 2500", "Dhanmondi 12", "asdf", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
-        aRoute.add(new RouteModel("Uttara 3000", "Dhanmondi 20", "rfadf", " shldjkf hlakjsd fhlkajsdh flkjasdf"));
+        aRoute.add(new RouteModel("Mirpur 1", "Motijheeel", "Via Kalshi", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Mirpur 1", "Matijheel", "Via Agargaon", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Mirpur 130", "Dhanmondi 32", "Via ha", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Mirpur 140", "Dhanmondi 01", "Via adsf", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Mirpur 150", "Dhanmondi 05", "Via 3ere", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Mirpur 260", "Dhanmondi 89", "Via twert", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Gulshan 500", "Uttara", "Via ywtr", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Uttara 1000", "Badda", "Via wert", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Uttara 1500", "Badda", "Via wert", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Uttara 2000", "Dhanmondi 25", "Via zxv", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Uttara 2500", "Dhanmondi 12", "Via asdf", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
+        aRoute.add(new RouteModel("Uttara 3000", "Dhanmondi 20", "Via rfadf", "Pickup 1, Pickup 2, Pickup 3, Pickup 4..."));
 
         return aRoute;
     }

@@ -1,6 +1,7 @@
 package bd.com.letsride.user.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,32 +32,38 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txtAmount, txtBonus;
-        LinearLayout layoutContainerCredit;
+        LinearLayout layoutCredit;
 
         public MyViewHolder(View view) {
             super(view);
             txtAmount = (TextView) view.findViewById(R.id.TextView_CreditAmount);
             txtBonus = (TextView) view.findViewById(R.id.TextView_BonusAmount);
-            layoutContainerCredit = (LinearLayout) view.findViewById(R.id.layoutContainerCredit);
+            layoutCredit = (LinearLayout) view.findViewById(R.id.linearlayout_credit_package);
         }
     }
 
     @Override
-    public CreditPurchaseAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_credit_purchase, parent, false);
-        return new CreditPurchaseAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final CreditPurchaseAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+        //Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_bold.ttf");
+        //Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
+
         CreditPurchaseModel aCredit = creditList.get(position);
         holder.txtAmount.setText(aCredit.getAmount());
-        if(Integer.parseInt(aCredit.getBonusAmount())>0)
+        if(aCredit.getBonusAmount()>0)
         {
             holder.txtBonus.setText("Bonus BDT. "+aCredit.getBonusAmount());
         }
 
-        holder.layoutContainerCredit.setOnClickListener(new View.OnClickListener() {
+        //holder.txtAmount.setTypeface(font_bold);
+        //holder.txtBonus.setTypeface(font_normal);
+
+        holder.layoutCredit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CreditPurchaseButtomSheet bottomSheet = new CreditPurchaseButtomSheet();
@@ -64,7 +71,8 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
                 CreditPurchaseModel credit = creditList.get(holder.getAdapterPosition());
 
                 Bundle bundle = new Bundle();
-                bundle.putString("price", credit.getAmount());
+                bundle.putInt("current_balance", 20);
+                bundle.putInt("recharge_balance", credit.getAmount());
                 bottomSheet.setArguments(bundle);
 
                 bottomSheet.show(((HomeActivity)mContext).getSupportFragmentManager(), "ModalBottomSheet");

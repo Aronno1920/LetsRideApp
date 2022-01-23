@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Login"
-        android:textColor="@color/white" />
+        android:textColor="@color/colorTextWhite" />
 
     <LinearLayout
         android:layout_width="match_parent"

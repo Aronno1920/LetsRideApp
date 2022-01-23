@@ -5,7 +5,7 @@
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:clickable="true"
@@ -13,23 +13,23 @@
         android:background="?android:attr/selectableItemBackground"
         card_view:cardPreventCornerOverlap="false"
         card_view:cardUseCompatPadding="true"
-        android:elevation="10dp"
-        card_view:cardCornerRadius="@dimen/card_ride_details_round">
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_ride_upcoming_round">
 
         <LinearLayout
-            android:id="@+id/layoutContainerCredit"
+            android:id="@+id/linearlayout_credit_package"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5pt"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/TextView_CreditAmount"
-                android:textColor="@color/bg_screen2"
+                android:textColor="@color/colorTextBlue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textFontWeight="700"
-                android:textSize="25dp"/>
+                android:textStyle="bold"
+                android:textSize="20dp"/>
             <TextView
                 android:id="@+id/TextView_BonusAmount"
                 android:layout_width="match_parent"

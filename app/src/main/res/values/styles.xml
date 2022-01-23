@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Fab_LetsRide_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">#0F9D58</item>
-        <item name="colorPrimaryVariant">#0F9D58</item>
-        <item name="colorOnPrimary">#000</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
     </style>
 
     <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">

@@ -1,6 +1,7 @@
 package bd.com.letsride.user.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,10 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
 
     @Override
     public void onBindViewHolder(final AvailableRouteAdapter.MyViewHolder holder, int position) {
+        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
+        Typeface font_italic = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_italic.ttf");
+        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_bold.ttf");
+
         RouteModel aRoute = routeList.get(position);
 
         holder.txtPickup.setText(aRoute.getPickZoneName());
@@ -52,6 +57,11 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
             holder.txtViaZone.setText(aRoute.getViaZoneName());
         }
         holder.txtDescription.setText(aRoute.getZoneDescription());
+
+        holder.txtPickup.setTypeface(font_bold);
+        holder.txtDropOff.setTypeface(font_bold);
+        holder.txtViaZone.setTypeface(font_normal);
+        holder.txtDescription.setTypeface(font_italic);
     }
 
     @Override
