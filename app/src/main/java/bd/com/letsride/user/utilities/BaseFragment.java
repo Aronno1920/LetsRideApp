@@ -7,12 +7,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Locale;
 
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     SessionManager session;
+
+    private TextView txtTitleInNewHeader;
+    public LinearLayout imageViewBackButtonInNewHeader;
+    public LinearLayout imvHistoryButtonInHeader;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -42,4 +48,6 @@ public class BaseFragment extends Fragment {
         }
         resources.updateConfiguration(config, dm);
     }
+
+    public abstract void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable);
 }

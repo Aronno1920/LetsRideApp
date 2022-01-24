@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragment_title_route">Available Routes</string>
+    <string name="fragment_title_purchase_credit">Purchase Credit</string>
+    <string name="fragment_title_setting">Setting</string>
+</resources>

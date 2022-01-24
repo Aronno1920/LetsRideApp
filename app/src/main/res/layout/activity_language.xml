@@ -8,7 +8,6 @@
     android:background="@drawable/language_selection"
     tools:context=".activities.LanguageActivity">
 
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"

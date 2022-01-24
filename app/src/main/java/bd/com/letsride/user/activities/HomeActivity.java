@@ -16,10 +16,11 @@ import bd.com.letsride.user.fragments.RoutesFragment;
 import bd.com.letsride.user.fragments.SettingFragment;
 import bd.com.letsride.user.models.SettingMenuModel;
 import bd.com.letsride.user.utilities.BaseActivity;
+import bd.com.letsride.user.utilities.FragmentRouting;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends BaseActivity implements SettingFragment.OnSettingsFragmentInteraction {
+public class HomeActivity extends BaseActivity implements SettingFragment.OnSettingsFragmentInteraction, RoutesFragment.OnRouteFragmentInteraction {
 
     SettingMenuModel settingMenuModel;
     BottomNavigationView bottomNavigationView;
@@ -149,5 +150,14 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
         callIntent.setData(Uri.parse("tel:" + phone));
         startActivity(callIntent);
+    }
+
+    int whereToGo;
+
+    @Override
+    public void onRouteButtonClicked(int whereToGo) {
+        if (whereToGo == FragmentRouting.DashboardFragment) {
+            loadFragment(new DashboardFragment());
+        }
     }
 }

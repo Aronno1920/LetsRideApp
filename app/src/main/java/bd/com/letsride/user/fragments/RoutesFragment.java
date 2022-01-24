@@ -1,11 +1,13 @@
 package bd.com.letsride.user.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.app.Fragment;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +18,6 @@ import java.util.List;
 
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.adapters.AvailableRouteAdapter;
-import bd.com.letsride.user.adapters.RideUpcomingAdapter;
 import bd.com.letsride.user.models.RouteModel;
 import bd.com.letsride.user.utilities.BaseFragment;
 
@@ -25,6 +26,13 @@ public class RoutesFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private List<RouteModel> routeList;
     private AvailableRouteAdapter routeAdapter;
+
+    //Start Header Section
+    private View view;
+    private TextView txtHeaderTitle;
+    public LinearLayout llHeaderBackButton;
+    public LinearLayout llHeaderHistoryButton;
+    //End Header Section
 
     public RoutesFragment() {
 
@@ -37,8 +45,21 @@ public class RoutesFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_routes, container, false);
+        view = inflater.inflate(R.layout.fragment_routes, container, false);
 
+        extracted(container);
+        register();
+        setHeaderSection(getString(R.string.fragment_title_route), false, false);
+
+        return view;
+    }
+
+    private void register() {
+        imageViewBackButtonInNewHeader = view.findViewById(R.id.imageViewBackButtonInNewHeader);
+        imageViewBackButtonInNewHeader.setOnClickListener(v -> mListener.onRouteButtonClicked(1));
+    }
+
+    private void extracted(ViewGroup container) {
         routeList = GetAllRoutes();
         recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerView_Available_Route);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -47,8 +68,6 @@ public class RoutesFragment extends BaseFragment {
         routeAdapter = new AvailableRouteAdapter(container.getContext(), routeList);
         recyclerView.setAdapter(routeAdapter);
         routeAdapter.notifyDataSetChanged();
-
-        return view;
     }
 
     public List<RouteModel> GetAllRoutes() {
@@ -68,4 +87,39 @@ public class RoutesFragment extends BaseFragment {
 
         return aRoute;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnRouteFragmentInteraction) {
+            mListener = (OnRouteFragmentInteraction) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnRouteFragmentInteraction");
+        }
+    }
+    OnRouteFragmentInteraction mListener;
+    public interface OnRouteFragmentInteraction {
+        void onRouteButtonClicked(int whereToGo);
+    }
+
+
+    //Start Header Section
+    @Override
+    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
+        txtHeaderTitle = (TextView) view.findViewById(R.id.txtTitleInNewHeader);
+        llHeaderBackButton = (LinearLayout) view.findViewById(R.id.imageViewBackButtonInNewHeader);
+        llHeaderHistoryButton = (LinearLayout) view.findViewById(R.id.imvHistoryButtonInHeader);
+
+        txtHeaderTitle.setText(strPageTitle);
+        if(isBackButtonVisiable==false)
+        {
+            llHeaderBackButton.setVisibility(View.GONE);
+        }
+        if(isHistoryButtonVisiable==false){
+            llHeaderHistoryButton.setVisibility(View.GONE);
+        }
+    }
+    //End Header Section
+
 }

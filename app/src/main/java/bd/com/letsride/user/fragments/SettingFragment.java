@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,13 @@ public class SettingFragment extends BaseFragment {
     List<SettingMenuModel> arrayOfUsers;
     OnSettingsFragmentInteraction mListener;
 
+    //Start Header Section
+    private View view;
+    private TextView txtHeaderTitle;
+    public LinearLayout llHeaderBackButton;
+    public LinearLayout llHeaderHistoryButton;
+    //End Header Section
+
     public SettingFragment() {
     }
 
@@ -35,13 +44,15 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
+         view = inflater.inflate(R.layout.fragment_setting, container, false);
 
         arrayOfUsers = GetAllSettingMenu();
         mainListView = (ListView) view.findViewById(R.id.ListView_Settings_Menu);
         listAdapter = new SettingMenuAdapter(container.getContext(), arrayOfUsers);
         mainListView.setAdapter(listAdapter);
         register();
+
+        setHeaderSection(getString(R.string.fragment_title_setting), false, false);
 
         return view;
     }
@@ -74,6 +85,7 @@ public class SettingFragment extends BaseFragment {
         return aMenu;
     }
 
+    //Start callback function for fragment redirection
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -88,4 +100,24 @@ public class SettingFragment extends BaseFragment {
     public interface OnSettingsFragmentInteraction {
         void onSettingsButtonClicked(SettingMenuModel settingMenuModel);
     }
+    //End callback
+
+
+    //Start Header Section
+    @Override
+    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
+        txtHeaderTitle = (TextView) view.findViewById(R.id.txtTitleInNewHeader);
+        llHeaderBackButton = (LinearLayout) view.findViewById(R.id.imageViewBackButtonInNewHeader);
+        llHeaderHistoryButton = (LinearLayout) view.findViewById(R.id.imvHistoryButtonInHeader);
+
+        txtHeaderTitle.setText(strPageTitle);
+        if(isBackButtonVisiable==false)
+        {
+            llHeaderBackButton.setVisibility(View.INVISIBLE);
+        }
+        if(isHistoryButtonVisiable==false){
+            llHeaderHistoryButton.setVisibility(View.INVISIBLE);
+        }
+    }
+    //End Header Section
 }

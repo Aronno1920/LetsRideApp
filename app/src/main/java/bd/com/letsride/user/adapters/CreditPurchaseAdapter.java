@@ -50,18 +50,17 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        //Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_bold.ttf");
-        //Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
+        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_bold.ttf");
+        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
 
         CreditPurchaseModel aCredit = creditList.get(position);
-        holder.txtAmount.setText(aCredit.getAmount());
-        if(aCredit.getBonusAmount()>0)
-        {
-            holder.txtBonus.setText("Bonus BDT. "+aCredit.getBonusAmount());
+        holder.txtAmount.setText(String.valueOf(aCredit.getAmount()));
+        if (aCredit.getBonusAmount() > 0) {
+            holder.txtBonus.setText("Bonus amount :"+String.valueOf(aCredit.getBonusAmount()));
         }
 
-        //holder.txtAmount.setTypeface(font_bold);
-        //holder.txtBonus.setTypeface(font_normal);
+         holder.txtAmount.setTypeface(font_bold);
+        holder.txtBonus.setTypeface(font_normal);
 
         holder.layoutCredit.setOnClickListener(new View.OnClickListener() {
             @Override

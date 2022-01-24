@@ -68,4 +68,9 @@ public class DashboardFragment extends BaseFragment {
 
         return rModel;
     }
+
+    @Override
+    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
+
+    }
 }

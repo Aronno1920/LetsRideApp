@@ -14,8 +14,7 @@ import bd.com.letsride.user.utilities.BaseButtomSheetFragment;
 public class CreditPurchaseButtomSheet extends BaseButtomSheetFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.buttom_sheet_credit_purchase, container, false);
 
         Bundle bundle = getArguments();
@@ -28,15 +27,14 @@ public class CreditPurchaseButtomSheet extends BaseButtomSheetFragment {
         TextView lblRecharge = v.findViewById(R.id.button_sheet_recharge_balance);
         TextView lblNew = v.findViewById(R.id.button_sheet_new_balance);
 
-        int newMyBalance = current+recharge;
-        lblCurrent.setText(current.toString());
-        lblRecharge.setText(recharge.toString());
-        lblNew.setText(newMyBalance);
+        int newMyBalance = current + recharge;
+        lblCurrent.setText(String.valueOf(current));
+        lblRecharge.setText(String.valueOf(recharge));
+        lblNew.setText(String.valueOf(newMyBalance));
 
         algo_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Toast.makeText(getActivity(),
                         "Payment Successfull. Thanks for support us.", Toast.LENGTH_SHORT)
                         .show();
@@ -46,8 +44,7 @@ public class CreditPurchaseButtomSheet extends BaseButtomSheetFragment {
 
         course_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Toast.makeText(getActivity(),
                         "Sorry! You can process your request.", Toast.LENGTH_SHORT)
                         .show();
