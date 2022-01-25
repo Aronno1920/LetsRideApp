@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#005b96</color>
+    <color name="colorPrimary">#DE070C</color>
     <color name="colorPrimaryVariant">#6497b1</color>
     <color name="colorOnPrimary">#000</color>
 
     <color name="colorTextWhite">#FFFFFFFF</color>
-    <color name="colorTextBlue">#005b96</color>
+    <color name="colorTextBlue">#DE070C</color>
 
     <color name="floting_background">#005b96</color>
     <color name="floting_icon">#FFFFFFFF</color>
 
     <color name="fragment_background">#f8f8f8</color>
-
-    <!-- Screens background color-->
-    <color name="bg_screen1">#f64c73</color>
-    <color name="bg_screen2">#20d2bb</color>
-    <color name="bg_screen3">#3395ff</color>
-    <color name="bg_screen4">#c873f4</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#d1395c</color>

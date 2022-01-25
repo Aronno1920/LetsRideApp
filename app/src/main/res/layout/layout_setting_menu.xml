@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/ImageView_MenuIcon"
-            android:src="@drawable/ic_dropoff" />
+            android:src="@drawable/bd" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"

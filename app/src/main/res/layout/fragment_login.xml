@@ -39,6 +39,7 @@
         android:id="@+id/Button_Login"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/style_buttom"
         android:layout_centerInParent="true"
         android:text="Login"
         android:textColor="@color/colorTextWhite" />
@@ -65,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
-                android:textColor="@color/bg_screen2"
+                android:textColor="@color/colorPrimary"
                 android:text="@string/level_SignUp" />
         </LinearLayout>
     </LinearLayout>

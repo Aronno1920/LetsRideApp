@@ -1,6 +1,5 @@
 package bd.com.letsride.user.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
@@ -54,7 +53,6 @@ public class WelcomeActivity extends BaseActivity {
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
-
 
         // layouts of all welcome sliders
         // add few more layouts if you want

@@ -35,7 +35,7 @@
     <!-- TODO: Verification Screen -->
     <string name="level_verify_message">আপনার মোবাইল নম্বরে মেসেজ এ পাওয়া ভ্যারিফিকেশন কোড টি লিখুন</string>
     <string name="level_verify_button">Verify</string>
-    <string name="large_text"></string>
+
     <string name="fragment_title_route">অনুমোদিত রুটস</string>
     <string name="fragment_title_purchase_credit">Purchase Credit</string>
     <string name="fragment_title_setting">Setting</string>
