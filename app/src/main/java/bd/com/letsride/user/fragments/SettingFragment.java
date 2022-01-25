@@ -27,13 +27,6 @@ public class SettingFragment extends BaseFragment {
     List<SettingMenuModel> arrayOfUsers;
     OnSettingsFragmentInteraction mListener;
 
-    //Start Header Section
-    private View view;
-    private TextView txtHeaderTitle;
-    public LinearLayout llHeaderBackButton;
-    public LinearLayout llHeaderHistoryButton;
-    //End Header Section
-
     public SettingFragment() {
     }
 
@@ -44,15 +37,13 @@ public class SettingFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         view = inflater.inflate(R.layout.fragment_setting, container, false);
+         View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
         arrayOfUsers = GetAllSettingMenu();
         mainListView = (ListView) view.findViewById(R.id.ListView_Settings_Menu);
         listAdapter = new SettingMenuAdapter(container.getContext(), arrayOfUsers);
         mainListView.setAdapter(listAdapter);
         register();
-
-        setHeaderSection(getString(R.string.fragment_title_setting), false, false);
 
         return view;
     }
@@ -71,11 +62,11 @@ public class SettingFragment extends BaseFragment {
         aMenu.add(new SettingMenuModel(1,"Home", "There is nothing like HOME", "ic_mlogo_home", false));
         aMenu.add(new SettingMenuModel(2,"Profile", "Update your profile", "ic_mlogo_profile", true));
         aMenu.add(new SettingMenuModel(3, "My Offers", "View your offers", "", true));
-        aMenu.add(new SettingMenuModel(4,"Purchase Credit", "Rechagge your wallet", "ic_credit", false));
+        aMenu.add(new SettingMenuModel(4,"Purchase Credit", "Rechagge your wallet", "ic_mlogo_home", false));
         aMenu.add(new SettingMenuModel(5,"Monthly Package", "Monthly tension free package", "ic_mlogo_monthly", true));
-        aMenu.add(new SettingMenuModel(6,"Available Routes", "Choose your nearest route", "ic_route", false));
-        aMenu.add(new SettingMenuModel(7,"My Rides", "View your previous ride", "", true));
-        aMenu.add(new SettingMenuModel(8,"My Upcoming Rides", "View your upcoming ride plan", "", true));
+        aMenu.add(new SettingMenuModel(6,"Available Routes", "Choose your nearest route", "ic_mlogo_home", false));
+        aMenu.add(new SettingMenuModel(7,"My Rides", "View your previous ride", "ic_mlogo_home", true));
+        aMenu.add(new SettingMenuModel(8,"My Upcoming Rides", "View your upcoming ride plan", "ic_mlogo_home", true));
         aMenu.add(new SettingMenuModel(9,"My Transactions", "View your clear transaction histry", "ic_mlogo_transaction", true));
         aMenu.add(new SettingMenuModel(10,"Customer Support", "Face any problem or want to ask", "ic_mlogo_support", false));
         aMenu.add(new SettingMenuModel(11,"Call 999", "Call 999 In-case of emergency", "ic_mlogo_emergency", false));
@@ -101,23 +92,4 @@ public class SettingFragment extends BaseFragment {
         void onSettingsButtonClicked(SettingMenuModel settingMenuModel);
     }
     //End callback
-
-
-    //Start Header Section
-    @Override
-    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
-        txtHeaderTitle = (TextView) view.findViewById(R.id.txtTitleInNewHeader);
-        llHeaderBackButton = (LinearLayout) view.findViewById(R.id.imageViewBackButtonInNewHeader);
-        llHeaderHistoryButton = (LinearLayout) view.findViewById(R.id.imvHistoryButtonInHeader);
-
-        txtHeaderTitle.setText(strPageTitle);
-        if(isBackButtonVisiable==false)
-        {
-            llHeaderBackButton.setVisibility(View.INVISIBLE);
-        }
-        if(isHistoryButtonVisiable==false){
-            llHeaderHistoryButton.setVisibility(View.INVISIBLE);
-        }
-    }
-    //End Header Section
 }

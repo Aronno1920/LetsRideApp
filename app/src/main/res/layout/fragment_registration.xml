@@ -7,6 +7,17 @@
     android:padding="15dp"
     tools:context=".fragments.RegistrationFragment">
 
+    <TextView
+        android:id="@+id/txtTitleInNewHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Registration Information"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

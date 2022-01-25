@@ -101,17 +101,17 @@ public class WelcomeActivity extends BaseActivity {
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
-//        dotsLayout.removeAllViews();
-//        for (int i = 0; i < dots.length; i++) {
-//            dots[i] = new TextView(this);
-//            dots[i].setText(Html.fromHtml("&#8226;"));
-//            dots[i].setTextSize(35);
-//            dots[i].setTextColor(colorsInactive[currentPage]);
-//            dotsLayout.addView(dots[0]);
-//        }
-//
-//        if (dots.length > 0)
-//            dots[currentPage].setTextColor(colorsActive[currentPage]);
+        dotsLayout.removeAllViews();
+       for (int i = 0; i < dots.length; i++) {
+            dots[0] = new TextView(this);
+            dots[0].setText(Html.fromHtml("&#8226;"));
+            dots[0].setTextSize(35);
+            dots[0].setTextColor(colorsInactive[currentPage]);
+            dotsLayout.addView(dots[0]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
     private int getItem(int i) {
@@ -155,7 +155,7 @@ public class WelcomeActivity extends BaseActivity {
     };
 
     private void changeStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);

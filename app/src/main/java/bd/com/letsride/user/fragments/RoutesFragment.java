@@ -27,12 +27,6 @@ public class RoutesFragment extends BaseFragment {
     private List<RouteModel> routeList;
     private AvailableRouteAdapter routeAdapter;
 
-    //Start Header Section
-    private View view;
-    private TextView txtHeaderTitle;
-    public LinearLayout llHeaderBackButton;
-    public LinearLayout llHeaderHistoryButton;
-    //End Header Section
 
     public RoutesFragment() {
 
@@ -45,21 +39,8 @@ public class RoutesFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_routes, container, false);
+        View view = inflater.inflate(R.layout.fragment_routes, container, false);
 
-        extracted(container);
-        register();
-        setHeaderSection(getString(R.string.fragment_title_route), false, false);
-
-        return view;
-    }
-
-    private void register() {
-        imageViewBackButtonInNewHeader = view.findViewById(R.id.imageViewBackButtonInNewHeader);
-        imageViewBackButtonInNewHeader.setOnClickListener(v -> mListener.onRouteButtonClicked(1));
-    }
-
-    private void extracted(ViewGroup container) {
         routeList = GetAllRoutes();
         recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerView_Available_Route);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
@@ -68,6 +49,8 @@ public class RoutesFragment extends BaseFragment {
         routeAdapter = new AvailableRouteAdapter(container.getContext(), routeList);
         recyclerView.setAdapter(routeAdapter);
         routeAdapter.notifyDataSetChanged();
+
+        return view;
     }
 
     public List<RouteModel> GetAllRoutes() {
@@ -102,24 +85,4 @@ public class RoutesFragment extends BaseFragment {
     public interface OnRouteFragmentInteraction {
         void onRouteButtonClicked(int whereToGo);
     }
-
-
-    //Start Header Section
-    @Override
-    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
-        txtHeaderTitle = (TextView) view.findViewById(R.id.txtTitleInNewHeader);
-        llHeaderBackButton = (LinearLayout) view.findViewById(R.id.imageViewBackButtonInNewHeader);
-        llHeaderHistoryButton = (LinearLayout) view.findViewById(R.id.imvHistoryButtonInHeader);
-
-        txtHeaderTitle.setText(strPageTitle);
-        if(isBackButtonVisiable==false)
-        {
-            llHeaderBackButton.setVisibility(View.GONE);
-        }
-        if(isHistoryButtonVisiable==false){
-            llHeaderHistoryButton.setVisibility(View.GONE);
-        }
-    }
-    //End Header Section
-
 }

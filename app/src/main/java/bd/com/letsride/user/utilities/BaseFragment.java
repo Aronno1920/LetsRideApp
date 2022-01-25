@@ -48,6 +48,4 @@ public abstract class BaseFragment extends Fragment {
         }
         resources.updateConfiguration(config, dm);
     }
-
-    public abstract void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable);
 }

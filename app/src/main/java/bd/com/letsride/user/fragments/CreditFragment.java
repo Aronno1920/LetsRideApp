@@ -25,12 +25,6 @@ public class CreditFragment extends BaseFragment {
     private List<CreditPurchaseModel> creditList;
     private CreditPurchaseAdapter creditAdapter;
 
-    //Start Header Section
-    private View view;
-    private TextView txtHeaderTitle;
-    public LinearLayout llHeaderBackButton;
-    public LinearLayout llHeaderHistoryButton;
-    //End Header Section
 
     public CreditFragment()
     {
@@ -43,7 +37,7 @@ public class CreditFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_credit, container, false);
+        View view = inflater.inflate(R.layout.fragment_credit, container, false);
 
         creditList = GetAllCredits();
         recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerView_Credit_Purchase);
@@ -54,28 +48,8 @@ public class CreditFragment extends BaseFragment {
         recyclerView.setAdapter(creditAdapter);
         creditAdapter.notifyDataSetChanged();
 
-        setHeaderSection(getString(R.string.fragment_title_purchase_credit), true, true);
-
         return view;
     }
-
-    //Start Header Section
-    @Override
-    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
-        txtHeaderTitle = (TextView) view.findViewById(R.id.txtTitleInNewHeader);
-        llHeaderBackButton = (LinearLayout) view.findViewById(R.id.imageViewBackButtonInNewHeader);
-        llHeaderHistoryButton = (LinearLayout) view.findViewById(R.id.imvHistoryButtonInHeader);
-
-        txtHeaderTitle.setText(strPageTitle);
-        if(isBackButtonVisiable==false)
-        {
-            llHeaderBackButton.setVisibility(View.GONE);
-        }
-        if(isHistoryButtonVisiable==false){
-            llHeaderHistoryButton.setVisibility(View.GONE);
-        }
-    }
-    //End Header Section
 
     public List<CreditPurchaseModel> GetAllCredits(){
         List<CreditPurchaseModel> cModel = new ArrayList<CreditPurchaseModel>();

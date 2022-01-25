@@ -42,9 +42,4 @@ public class VerificationFragment extends BaseFragment {
 
         return view;
     }
-
-    @Override
-    public void setHeaderSection(String strPageTitle, boolean isBackButtonVisiable, boolean isHistoryButtonVisiable) {
-
-    }
 }
