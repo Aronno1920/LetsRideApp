@@ -1,5 +1,8 @@
 package bd.com.letsride.user.apiClasses;
 
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
 public interface ApiInterface {
 
 //    @POST("user/Login")

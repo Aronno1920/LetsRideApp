@@ -5,9 +5,9 @@
     <color name="colorOnPrimary">#000</color>
 
     <color name="colorTextWhite">#FFFFFFFF</color>
-    <color name="colorTextBlue">#424242</color>
+    <color name="colorTextBlue">#646464</color>
 
-    <color name="floting_background">#424242</color>
+    <color name="floting_background">#646464</color>
     <color name="floting_icon">#FFFFFFFF</color>
 
     <color name="background_fragment">#dddddd</color>

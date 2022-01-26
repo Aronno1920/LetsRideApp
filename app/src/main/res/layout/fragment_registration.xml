@@ -22,28 +22,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_mobile_number"
-        android:textSize="15dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/style_edittext" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_first_name"
-        android:textSize="15dp"
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/style_edittext" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_last_name"
-        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
         android:background="@drawable/style_edittext" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_email_address"
-        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
         android:background="@drawable/style_edittext" />
 
 </LinearLayout>

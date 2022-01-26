@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +41,12 @@ public class SettingFragment extends BaseFragment {
         mainListView = (ListView) view.findViewById(R.id.ListView_Settings_Menu);
         listAdapter = new SettingMenuAdapter(container.getContext(), arrayOfUsers);
         mainListView.setAdapter(listAdapter);
-        register();
+        OnClickAsClistenner();
 
         return view;
     }
 
-    private void register() {
+    private void OnClickAsClistenner() {
         mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
