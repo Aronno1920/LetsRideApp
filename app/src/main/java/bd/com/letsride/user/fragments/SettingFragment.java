@@ -61,12 +61,12 @@ public class SettingFragment extends BaseFragment {
         List<SettingMenuModel> aMenu = new ArrayList<SettingMenuModel>();
         aMenu.add(new SettingMenuModel(1,"Home", "There is nothing like HOME", "ic_mlogo_home", false));
         aMenu.add(new SettingMenuModel(2,"Profile", "Update your profile", "ic_mlogo_profile", true));
-        aMenu.add(new SettingMenuModel(3, "My Offers", "View your offers", "", true));
-        aMenu.add(new SettingMenuModel(4,"Purchase Credit", "Rechagge your wallet", "ic_mlogo_home", false));
+        aMenu.add(new SettingMenuModel(3,"My Offers", "View your offers", "ic_mlogo_offer", true));
+        aMenu.add(new SettingMenuModel(4,"Purchase Credit", "Rechagge your wallet", "ic_mlogo_credit", false));
         aMenu.add(new SettingMenuModel(5,"Monthly Package", "Monthly tension free package", "ic_mlogo_monthly", true));
-        aMenu.add(new SettingMenuModel(6,"Available Routes", "Choose your nearest route", "ic_mlogo_home", false));
-        aMenu.add(new SettingMenuModel(7,"My Rides", "View your previous ride", "ic_mlogo_home", true));
-        aMenu.add(new SettingMenuModel(8,"My Upcoming Rides", "View your upcoming ride plan", "ic_mlogo_home", true));
+        aMenu.add(new SettingMenuModel(6,"Available Routes", "Choose your nearest route", "ic_mlogo_route", false));
+        aMenu.add(new SettingMenuModel(7,"My Rides", "View your previous ride", "ic_mlogo_ride", true));
+        aMenu.add(new SettingMenuModel(8,"My Upcoming Rides", "View your upcoming ride plan", "ic_mlogo_upcoming", true));
         aMenu.add(new SettingMenuModel(9,"My Transactions", "View your clear transaction histry", "ic_mlogo_transaction", true));
         aMenu.add(new SettingMenuModel(10,"Customer Support", "Face any problem or want to ask", "ic_mlogo_support", false));
         aMenu.add(new SettingMenuModel(11,"Call 999", "Call 999 In-case of emergency", "ic_mlogo_emergency", false));

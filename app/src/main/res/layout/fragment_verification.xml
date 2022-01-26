@@ -24,7 +24,7 @@
     <Button
         android:id="@+id/Button_Verify"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/style_buttom"
         android:layout_centerInParent="true"
         android:text="@string/level_verify_button"

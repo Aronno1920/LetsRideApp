@@ -12,4 +12,7 @@
     <dimen name="img_welcome_size">250dp</dimen>
     <dimen name="card_ride_upcoming_round">10dp</dimen>
     <dimen name="card_ride_upcoming_width">300dp</dimen>
+
+    <dimen name="button_height_small">100px</dimen>
+    <dimen name="button_height_large">60px</dimen>
 </resources>
