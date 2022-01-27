@@ -1,16 +1,48 @@
 package bd.com.letsride.user.apiClasses;
 
+import bd.com.letsride.user.models.VerificatinCodeResponse;
+import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-//    @POST("user/Login")
-//    Call<LoginResponse> EmployeeLogin(
-//            @Query("EmpID") String empId,
-//            @Query("Password") String password
-//    );
-//
+    @POST("Auth/VerifyOTP")
+    Call<VerificatinCodeResponse> requestVerificatinCode(
+            @Query("source") String source,
+            @Query("tacFor") String tacFor,
+            @Query("countryCode") String countryCode,
+            @Query("mobileNumber") String mobileNumber
+    );
+
+
+//          "source": "string",
+//          "tacFor": "string",
+//          "countryCode": "string",
+//          "mobileNumber": "string"
+//          -----------------
+//          "source": "string",
+//          "tacFor": "string",
+//          "countryCode": "string",
+//          "mobileNumber": "string",
+//          "prefix": "string",
+//          "tac": "string"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    @GET("user/GetAllActionPlan")
 //    Call<List<ActionPlanModel>> GetAllActionPlanList();
 //
