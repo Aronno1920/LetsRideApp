@@ -17,6 +17,7 @@ import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
 import bd.com.letsride.user.apiModels.ResponseOfRequest;
 import bd.com.letsride.user.apiModels.SendOTPRequest;
+import bd.com.letsride.user.apiModels.SendOTPResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
@@ -27,7 +28,7 @@ public class LoginFragment extends BaseFragment {
     TextView tvSignUp;
     Button btnLogin;
     EditText txtMobileNumber;
-    Boolean isSMSSend=false;
+    SendOTPResponse otpResponse;
 
     public LoginFragment() {
     }
@@ -62,18 +63,15 @@ public class LoginFragment extends BaseFragment {
                     if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
                         requestVerificationCode();
 
-                        if (isSMSSend) {
+                        Bundle i = new Bundle();
+                        i.putString("prefix", otpResponse.getPrefix());
+                        VerificationFragment verificationFragment = new VerificationFragment();
+                        verificationFragment.setArguments(i);
 
-                            Bundle i = new Bundle();
-                            i.putString("prefix", "SBL");
-                            VerificationFragment verificationFragment = new VerificationFragment();
-                            verificationFragment.setArguments(i);
-
-                            FragmentManager fm = getFragmentManager();
-                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                            fragmentTransaction.replace(R.id.your_placeholder, verificationFragment);
-                            fragmentTransaction.commit();
-                        }
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.your_placeholder, verificationFragment);
+                        fragmentTransaction.commit();
 
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Mobile Number is not valid", Toast.LENGTH_LONG).show();
@@ -87,9 +85,9 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void requestVerificationCode() {
-       if(UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
+        if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
-           SendOTPRequest otpRequest = new SendOTPRequest("Mobile","Login","+88", txtMobileNumber.getText().toString());
+            SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Login", "+88", txtMobileNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
             Call<ResponseOfRequest> call = apiService.requestVerificatinCode(otpRequest);
@@ -98,16 +96,15 @@ public class LoginFragment extends BaseFragment {
                 public void onResponse(Call<ResponseOfRequest> call, retrofit2.Response<ResponseOfRequest> response) {
                     if (response.code() == 200) {
                         ResponseOfRequest result = (ResponseOfRequest) response.body();
-                        if(result.getSucceeded())
-                        {
-                            isSMSSend=result.getSucceeded();
+                        if (result.getSucceeded()) {
+                            otpResponse = result.getSendOTPResponse();
                         }
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseOfRequest> call, Throwable t) {
-                    Log.d("A1920:Error",t.getMessage());
+                    Log.d("A1920:Error", t.getMessage());
                 }
             });
         }

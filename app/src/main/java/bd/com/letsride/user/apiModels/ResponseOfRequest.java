@@ -8,7 +8,7 @@ public class ResponseOfRequest {
 
     @SerializedName("data")
     @Expose
-    private Object data;
+    private SendOTPResponse otpResponse;
     @SerializedName("errors")
     @Expose
     private List<Object> errors = null;
@@ -31,12 +31,12 @@ public class ResponseOfRequest {
     @Expose
     private Object exception;
 
-    public Object getData() {
-        return data;
+    public SendOTPResponse getSendOTPResponse() {
+        return otpResponse;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setSendOTPResponse(SendOTPResponse data) {
+        this.otpResponse = data;
     }
 
     public List<Object> getErrors() {
