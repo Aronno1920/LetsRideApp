@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
-import bd.com.letsride.user.apiModels.ResponseStatus;
+import bd.com.letsride.user.apiModels.ResponseOfRequest;
 import bd.com.letsride.user.apiModels.SendOTPRequest;
-import bd.com.letsride.user.apiModels.VerificationResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
@@ -25,6 +26,8 @@ public class LoginFragment extends BaseFragment {
 
     TextView tvSignUp;
     Button btnLogin;
+    EditText txtMobileNumber;
+    Boolean isSMSSend=false;
 
     public LoginFragment() {
     }
@@ -39,6 +42,7 @@ public class LoginFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         tvSignUp = (TextView) view.findViewById(R.id.TextView_SignUp);
         btnLogin = view.findViewById(R.id.Button_Login);
+        txtMobileNumber = view.findViewById(R.id.EditText_MobileNumber);
 
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +58,29 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                requestVerificationCode();
+                if (txtMobileNumber.getText().length() >= 10) {
+                    if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
+                        requestVerificationCode();
 
-//                FragmentManager fm = getFragmentManager();
-//                FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//                fragmentTransaction.replace(R.id.your_placeholder, new VerificationFragment());
-//                fragmentTransaction.commit();
+                        if (isSMSSend) {
+
+                            Bundle i = new Bundle();
+                            i.putString("prefix", "SBL");
+                            VerificationFragment verificationFragment = new VerificationFragment();
+                            verificationFragment.setArguments(i);
+
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.your_placeholder, verificationFragment);
+                            fragmentTransaction.commit();
+                        }
+
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Mobile Number is not valid", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Mobile Number must be atleast 10 digit", Toast.LENGTH_LONG).show();
+                }
             }
         });
         return view;
@@ -68,23 +89,24 @@ public class LoginFragment extends BaseFragment {
     private void requestVerificationCode() {
        if(UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
-           SendOTPRequest otpRequest = new SendOTPRequest("Mobile","Login","+88","01912875657");
+           SendOTPRequest otpRequest = new SendOTPRequest("Mobile","Login","+88", txtMobileNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<ResponseStatus> call = apiService.requestVerificatinCode(otpRequest);
-            call.enqueue(new Callback<ResponseStatus>() {
+            Call<ResponseOfRequest> call = apiService.requestVerificatinCode(otpRequest);
+            call.enqueue(new Callback<ResponseOfRequest>() {
                 @Override
-                public void onResponse(Call<ResponseStatus> call, retrofit2.Response<ResponseStatus> response) {
+                public void onResponse(Call<ResponseOfRequest> call, retrofit2.Response<ResponseOfRequest> response) {
                     if (response.code() == 200) {
-
-                        ResponseStatus rstatus = (ResponseStatus) response.body();
-                        VerificationResponse data = new VerificationResponse(rstatus.getData().);
-                        Log.d("A1920",data.toString());
+                        ResponseOfRequest result = (ResponseOfRequest) response.body();
+                        if(result.getSucceeded())
+                        {
+                            isSMSSend=result.getSucceeded();
+                        }
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                public void onFailure(Call<ResponseOfRequest> call, Throwable t) {
                     Log.d("A1920:Error",t.getMessage());
                 }
             });

@@ -25,12 +25,14 @@
             android:text="@string/level_mobile_prefix"/>
 
         <EditText
+            android:id="@+id/EditText_MobileNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/style_edittext_noborder"
             android:textSize="16dp"
             android:hint="@string/level_mobile_number"
             android:lines="1"
+            android:maxLength="11"
             android:inputType="number"/>
     </LinearLayout>
 

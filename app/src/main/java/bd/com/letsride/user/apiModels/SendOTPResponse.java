@@ -3,7 +3,7 @@ package bd.com.letsride.user.apiModels;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VerificationResponse {
+public class SendOTPResponse {
 
     @SerializedName("prefix")
     @Expose
@@ -13,19 +13,29 @@ public class VerificationResponse {
     private String expiryDate;
     @SerializedName("isActive")
     @Expose
-    private Object isActive;
+    private Boolean isActive;
     @SerializedName("source")
     @Expose
-    private Object source;
+    private String source;
     @SerializedName("tacFor")
     @Expose
-    private Object tacFor;
+    private String tacFor;
     @SerializedName("countryCode")
     @Expose
-    private Object countryCode;
+    private String countryCode;
     @SerializedName("mobileNumber")
     @Expose
-    private Object mobileNumber;
+    private String mobileNumber;
+
+    public SendOTPResponse(String prefix, String expiryDate, Boolean isActive, String source, String tacFor, String countryCode, String mobileNumber) {
+        this.prefix = prefix;
+        this.expiryDate = expiryDate;
+        this.isActive = isActive;
+        this.source = source;
+        this.tacFor = tacFor;
+        this.countryCode = countryCode;
+        this.mobileNumber = mobileNumber;
+    }
 
     public String getPrefix() {
         return prefix;
@@ -43,58 +53,43 @@ public class VerificationResponse {
         this.expiryDate = expiryDate;
     }
 
-    public Object getIsActive() {
+    public Boolean getActive() {
         return isActive;
     }
 
-    public void setIsActive(Object isActive) {
-        this.isActive = isActive;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
-    public Object getSource() {
+    public String getSource() {
         return source;
     }
 
-    public void setSource(Object source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public Object getTacFor() {
+    public String getTacFor() {
         return tacFor;
     }
 
-    public void setTacFor(Object tacFor) {
+    public void setTacFor(String tacFor) {
         this.tacFor = tacFor;
     }
 
-    public Object getCountryCode() {
+    public String getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(Object countryCode) {
+    public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
 
-    public Object getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(Object mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "VerificationResponse{" +
-                "prefix='" + prefix + '\'' +
-                ", expiryDate='" + expiryDate + '\'' +
-                ", isActive=" + isActive +
-                ", source=" + source +
-                ", tacFor=" + tacFor +
-                ", countryCode=" + countryCode +
-                ", mobileNumber=" + mobileNumber +
-                '}';
     }
 }
