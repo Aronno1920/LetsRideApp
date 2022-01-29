@@ -1,4 +1,4 @@
-package bd.com.letsride.user.responses;
+package bd.com.letsride.user.apiModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,6 +7,9 @@ import java.util.List;
 
 public class ResponseStatus {
 
+    @SerializedName("data")
+    @Expose
+    private Object data;
     @SerializedName("errors")
     @Expose
     private List<Object> errors = null;
@@ -16,6 +19,9 @@ public class ResponseStatus {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("metadata")
+    @Expose
+    private Object metadata;
     @SerializedName("messageWithErrors")
     @Expose
     private String messageWithErrors;
@@ -25,6 +31,14 @@ public class ResponseStatus {
     @SerializedName("exception")
     @Expose
     private Object exception;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 
     public List<Object> getErrors() {
         return errors;
@@ -50,6 +64,14 @@ public class ResponseStatus {
         this.message = message;
     }
 
+    public Object getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(Object metadata) {
+        this.metadata = metadata;
+    }
+
     public String getMessageWithErrors() {
         return messageWithErrors;
     }
@@ -73,5 +95,4 @@ public class ResponseStatus {
     public void setException(Object exception) {
         this.exception = exception;
     }
-
 }

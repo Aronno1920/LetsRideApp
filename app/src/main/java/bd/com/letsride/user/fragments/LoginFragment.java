@@ -13,7 +13,9 @@ import android.widget.TextView;
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
-import bd.com.letsride.user.responses.VerificationRequestResponse;
+import bd.com.letsride.user.apiModels.ResponseStatus;
+import bd.com.letsride.user.apiModels.SendOTPRequest;
+import bd.com.letsride.user.apiModels.VerificationResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
@@ -66,21 +68,23 @@ public class LoginFragment extends BaseFragment {
     private void requestVerificationCode() {
        if(UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
+           SendOTPRequest otpRequest = new SendOTPRequest("Mobile","Login","+88","01912875657");
+
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-
-            Call<VerificationRequestResponse> call = apiService.requestVerificatinCode("Mobile","Registration","+88","01711148432");
-            call.enqueue(new Callback<VerificationRequestResponse>() {
+            Call<ResponseStatus> call = apiService.requestVerificatinCode(otpRequest);
+            call.enqueue(new Callback<ResponseStatus>() {
                 @Override
-                public void onResponse(Call<VerificationRequestResponse> call, retrofit2.Response<VerificationRequestResponse> response) {
+                public void onResponse(Call<ResponseStatus> call, retrofit2.Response<ResponseStatus> response) {
                     if (response.code() == 200) {
-                        Log.d("A1920",response.toString());
-                    }
 
-                    Log.d("A1920", String.valueOf(response.code()));
+                        ResponseStatus rstatus = (ResponseStatus) response.body();
+                        VerificationResponse data = new VerificationResponse(rstatus.getData().);
+                        Log.d("A1920",data.toString());
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<VerificationRequestResponse> call, Throwable t) {
+                public void onFailure(Call<ResponseStatus> call, Throwable t) {
                     Log.d("A1920:Error",t.getMessage());
                 }
             });

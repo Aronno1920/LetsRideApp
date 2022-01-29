@@ -30,28 +30,8 @@ public class ApiClient {
     private static Retrofit retrofit = null;
     private static OkHttpClient okHttpClient;
 
-//    public static Retrofit getClient() {
-//        if (okHttpClient == null) {
-//            initOkHttpClient();
-//        }
-//
-//        if (retrofit == null) {
-//            synchronized (ApiClient.class) {
-//                if (retrofit == null) {
-//                    retrofit = new Retrofit.Builder()
-//                            .baseUrl(BASE_URL)
-//                            .addConverterFactory(GsonConverterFactory.create())
-//                            .client(okHttpClient)
-//                            .build();
-//                }
-//            }
-//        }
-//        return retrofit;
-//    }
-
     public static Retrofit getClient(Context context) {
         try {
-
             if (okHttpClient == null) {
                 initOkHttpClient();
             }
@@ -86,7 +66,6 @@ public class ApiClient {
 
         return retrofit;
     }
-
 
     private static void initOkHttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {

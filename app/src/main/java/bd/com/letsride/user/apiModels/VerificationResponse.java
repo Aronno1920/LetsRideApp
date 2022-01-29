@@ -1,9 +1,9 @@
-package bd.com.letsride.user.responses;
+package bd.com.letsride.user.apiModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VerificationRequestResponse {
+public class VerificationResponse {
 
     @SerializedName("prefix")
     @Expose
@@ -26,7 +26,6 @@ public class VerificationRequestResponse {
     @SerializedName("mobileNumber")
     @Expose
     private Object mobileNumber;
-
 
     public String getPrefix() {
         return prefix;
@@ -84,4 +83,18 @@ public class VerificationRequestResponse {
         this.mobileNumber = mobileNumber;
     }
 
+
+
+    @Override
+    public String toString() {
+        return "VerificationResponse{" +
+                "prefix='" + prefix + '\'' +
+                ", expiryDate='" + expiryDate + '\'' +
+                ", isActive=" + isActive +
+                ", source=" + source +
+                ", tacFor=" + tacFor +
+                ", countryCode=" + countryCode +
+                ", mobileNumber=" + mobileNumber +
+                '}';
+    }
 }

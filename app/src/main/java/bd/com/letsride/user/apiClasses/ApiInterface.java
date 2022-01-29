@@ -1,19 +1,17 @@
 package bd.com.letsride.user.apiClasses;
 
-import bd.com.letsride.user.responses.VerificationRequestResponse;
+import bd.com.letsride.user.apiModels.ResponseStatus;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+
+import bd.com.letsride.user.apiModels.SendOTPRequest;
+import bd.com.letsride.user.apiModels.VerificationResponse;
 
 public interface ApiInterface {
 
-    @POST("Auth/VerifyOTP")
-    Call<VerificationRequestResponse> requestVerificatinCode(
-            @Query("source") String source,
-            @Query("tacFor") String tacFor,
-            @Query("countryCode") String countryCode,
-            @Query("mobileNumber") String mobileNumber
-    );
+    @POST("Auth/SendOTP")
+    Call<ResponseStatus> requestVerificatinCode(@Body SendOTPRequest model);
 
 //          -----------------
 //          "source": "string",
