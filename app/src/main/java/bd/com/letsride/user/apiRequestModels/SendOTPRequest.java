@@ -1,4 +1,4 @@
-package bd.com.letsride.user.apiModels;
+package bd.com.letsride.user.apiRequestModels;
 
 public class SendOTPRequest {
     private String source;

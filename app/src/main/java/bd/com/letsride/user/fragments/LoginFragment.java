@@ -2,6 +2,8 @@ package bd.com.letsride.user.fragments;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +14,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
-import bd.com.letsride.user.apiModels.ResponseOfRequest;
-import bd.com.letsride.user.apiModels.SendOTPRequest;
-import bd.com.letsride.user.apiModels.SendOTPResponse;
+import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
+import bd.com.letsride.user.apiRequestModels.SendOTPRequest;
+import bd.com.letsride.user.apiResponseModels.SendOTPData;
+import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
@@ -28,7 +33,6 @@ public class LoginFragment extends BaseFragment {
     TextView tvSignUp;
     Button btnLogin;
     EditText txtMobileNumber;
-    SendOTPResponse otpResponse;
 
     public LoginFragment() {
     }
@@ -61,17 +65,19 @@ public class LoginFragment extends BaseFragment {
 
                 if (txtMobileNumber.getText().length() >= 10) {
                     if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
-                        requestVerificationCode();
 
-                        Bundle i = new Bundle();
-                        i.putString("prefix", otpResponse.getPrefix());
-                        VerificationFragment verificationFragment = new VerificationFragment();
-                        verificationFragment.setArguments(i);
+                        try {
+                            new AsyncTaskOTPCall().execute();
 
-                        FragmentManager fm = getFragmentManager();
-                        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                        fragmentTransaction.replace(R.id.your_placeholder, verificationFragment);
-                        fragmentTransaction.commit();
+//                            Thread.sleep(2000);
+                            FragmentManager fm = getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                            fragmentTransaction.replace(R.id.your_placeholder, new VerificationFragment());
+                            fragmentTransaction.commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Mobile Number is not valid", Toast.LENGTH_LONG).show();
@@ -84,29 +90,60 @@ public class LoginFragment extends BaseFragment {
         return view;
     }
 
-    private void requestVerificationCode() {
+    private SendOTPData requestVerificationCode() {
+        final SendOTPData[] myOTP = new SendOTPData[1];
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Login", "+88", txtMobileNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<ResponseOfRequest> call = apiService.requestVerificatinCode(otpRequest);
-            call.enqueue(new Callback<ResponseOfRequest>() {
+            Call<SendOTPResponse> call = apiService.requestVerificatinCode(otpRequest);
+            call.enqueue(new Callback<SendOTPResponse>() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
-                public void onResponse(Call<ResponseOfRequest> call, retrofit2.Response<ResponseOfRequest> response) {
+                public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
                     if (response.code() == 200) {
-                        ResponseOfRequest result = (ResponseOfRequest) response.body();
+                        SendOTPResponse result = (SendOTPResponse) response.body();
+
                         if (result.getSucceeded()) {
-                            otpResponse = result.getSendOTPResponse();
+                            myOTP[0] = result.getData();
+                            new ResponseModelDAO().addSendOTPResponseToDAO(myOTP[0]);
+                        } else {
+                            Toast.makeText(getContext(), "Hoynai", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        Toast.makeText(getContext(), "Hoitona", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResponseOfRequest> call, Throwable t) {
+                public void onFailure(Call<SendOTPResponse> call, Throwable t) {
                     Log.d("A1920:Error", t.getMessage());
                 }
             });
+        }
+        return myOTP[0];
+    }
+
+    public class AsyncTaskOTPCall extends AsyncTask<Void, Void, SendOTPData> {
+
+        public AsyncTaskOTPCall() {
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected SendOTPData doInBackground(Void... voids) {
+            try {
+                requestVerificationCode();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

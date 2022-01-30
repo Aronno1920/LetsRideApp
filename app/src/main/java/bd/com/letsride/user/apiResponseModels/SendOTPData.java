@@ -1,9 +1,10 @@
-package bd.com.letsride.user.apiModels;
+package bd.com.letsride.user.apiResponseModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SendOTPResponse {
+
+public class SendOTPData {
 
     @SerializedName("prefix")
     @Expose
@@ -26,16 +27,6 @@ public class SendOTPResponse {
     @SerializedName("mobileNumber")
     @Expose
     private String mobileNumber;
-
-    public SendOTPResponse(String prefix, String expiryDate, Boolean isActive, String source, String tacFor, String countryCode, String mobileNumber) {
-        this.prefix = prefix;
-        this.expiryDate = expiryDate;
-        this.isActive = isActive;
-        this.source = source;
-        this.tacFor = tacFor;
-        this.countryCode = countryCode;
-        this.mobileNumber = mobileNumber;
-    }
 
     public String getPrefix() {
         return prefix;

@@ -1,20 +1,20 @@
 package bd.com.letsride.user.apiClasses;
 
-import bd.com.letsride.user.apiModels.ResponseOfRequest;
-import bd.com.letsride.user.apiModels.VerificationRequest;
+import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
+import bd.com.letsride.user.apiRequestModels.VerifyOTPRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-import bd.com.letsride.user.apiModels.SendOTPRequest;
+import bd.com.letsride.user.apiRequestModels.SendOTPRequest;
 
 public interface ApiInterface {
 
     @POST("Auth/SendOTP")
-    Call<ResponseOfRequest> requestVerificatinCode(@Body SendOTPRequest model);
+    Call<SendOTPResponse> requestVerificatinCode(@Body SendOTPRequest model);
 
     @POST("Auth/VerifyOTP")
-    Call<ResponseOfRequest> requestVerificatinSuccess(@Body VerificationRequest model);
+    Call<SendOTPResponse> requestVerificatinSuccess(@Body VerifyOTPRequest model);
 
 
 //    @GET("user/GetAllProduct")

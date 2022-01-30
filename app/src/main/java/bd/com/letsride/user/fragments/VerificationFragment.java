@@ -2,6 +2,7 @@ package bd.com.letsride.user.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.activities.HomeActivity;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
-import bd.com.letsride.user.apiModels.ResponseOfRequest;
-import bd.com.letsride.user.apiModels.VerificationRequest;
+import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
+import bd.com.letsride.user.apiRequestModels.VerifyOTPRequest;
+import bd.com.letsride.user.apiResponseModels.SendOTPData;
+import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
@@ -24,10 +30,11 @@ import retrofit2.Callback;
 
 public class VerificationFragment extends BaseFragment {
 
-    TextView tvPrefix;
+    TextView tvPrefix, tvTimer;
     EditText etVerificationNumber;
     Button btnVerify;
     Boolean isValid;
+    View view;
 
     public VerificationFragment() {
     }
@@ -35,21 +42,21 @@ public class VerificationFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Intent intent = getActivity().getIntent();
-        if (intent.getExtras() != null) {
-            String prefix = intent.getStringExtra("prefix");
-            tvPrefix.setText(prefix);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_verification, container, false);
+        view = inflater.inflate(R.layout.fragment_verification, container, false);
 
         tvPrefix = (TextView) view.findViewById(R.id.TextView_Prefix);
+        tvTimer = (TextView) view.findViewById(R.id.TextView_Countdown_timer);
         etVerificationNumber = (EditText) view.findViewById(R.id.EditText_Verification_Number);
         btnVerify = (Button) view.findViewById(R.id.Button_Verify);
+
+        SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+        tvPrefix.setText(sendOTPData.getPrefix());
+
+        StartTimer();
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,31 +80,43 @@ public class VerificationFragment extends BaseFragment {
         return view;
     }
 
-
     private void requestVerificatinSuccess() {
-        if(UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
+        if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
-            VerificationRequest otpRequest = new VerificationRequest("Mobile","Login","+88","",tvPrefix.getText().toString(),etVerificationNumber.getText().toString());
+            VerifyOTPRequest otpRequest = new VerifyOTPRequest("Mobile", "Login", "+88", "", tvPrefix.getText().toString(), etVerificationNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<ResponseOfRequest> call = apiService.requestVerificatinSuccess(otpRequest);
-            call.enqueue(new Callback<ResponseOfRequest>() {
+            Call<SendOTPResponse> call = apiService.requestVerificatinSuccess(otpRequest);
+            call.enqueue(new Callback<SendOTPResponse>() {
                 @Override
-                public void onResponse(Call<ResponseOfRequest> call, retrofit2.Response<ResponseOfRequest> response) {
+                public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
                     if (response.code() == 200) {
-                        ResponseOfRequest result = (ResponseOfRequest) response.body();
-                        if(result.getSucceeded())
-                        {
-                            isValid=result.getSucceeded();
+                        SendOTPResponse result = (SendOTPResponse) response.body();
+                        if (result.getSucceeded()) {
+                            isValid = result.getSucceeded();
                         }
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResponseOfRequest> call, Throwable t) {
-                    Log.d("A1920:Error",t.getMessage());
+                public void onFailure(Call<SendOTPResponse> call, Throwable t) {
+                    Log.d("A1920:Error", t.getMessage());
                 }
             });
         }
+    }
+
+    private void StartTimer() {
+        new CountDownTimer(120000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                tvTimer.setText("Seconds remaining: " + millisUntilFinished / 1000 + "s");
+            }
+
+            public void onFinish() {
+                tvTimer.setText("Don't receive? Send again");
+            }
+
+        }.start();
     }
 }

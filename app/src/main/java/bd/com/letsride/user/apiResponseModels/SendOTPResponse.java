@@ -1,14 +1,15 @@
-package bd.com.letsride.user.apiModels;
+package bd.com.letsride.user.apiResponseModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class ResponseOfRequest {
+public class SendOTPResponse {
 
     @SerializedName("data")
     @Expose
-    private SendOTPResponse otpResponse;
+    private SendOTPData data;
     @SerializedName("errors")
     @Expose
     private List<Object> errors = null;
@@ -18,9 +19,6 @@ public class ResponseOfRequest {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("metadata")
-    @Expose
-    private Metadata metadata;
     @SerializedName("messageWithErrors")
     @Expose
     private String messageWithErrors;
@@ -31,12 +29,12 @@ public class ResponseOfRequest {
     @Expose
     private Object exception;
 
-    public SendOTPResponse getSendOTPResponse() {
-        return otpResponse;
+    public SendOTPData getData() {
+        return data;
     }
 
-    public void setSendOTPResponse(SendOTPResponse data) {
-        this.otpResponse = data;
+    public void setData(SendOTPData data) {
+        this.data = data;
     }
 
     public List<Object> getErrors() {
@@ -63,14 +61,6 @@ public class ResponseOfRequest {
         this.message = message;
     }
 
-    public Metadata getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(Metadata metadata) {
-        this.metadata = metadata;
-    }
-
     public String getMessageWithErrors() {
         return messageWithErrors;
     }
@@ -93,6 +83,19 @@ public class ResponseOfRequest {
 
     public void setException(Object exception) {
         this.exception = exception;
+    }
+
+    @Override
+    public String toString() {
+        return "SendOTPResponse{" +
+                "data=" + data +
+                ", errors=" + errors +
+                ", failed=" + failed +
+                ", message='" + message + '\'' +
+                ", messageWithErrors='" + messageWithErrors + '\'' +
+                ", succeeded=" + succeeded +
+                ", exception=" + exception +
+                '}';
     }
 }
 

@@ -1,6 +1,6 @@
-package bd.com.letsride.user.apiModels;
+package bd.com.letsride.user.apiRequestModels;
 
-public class VerificationRequest {
+public class VerifyOTPRequest {
 
     private String source;
     private String tacFor;
@@ -9,7 +9,7 @@ public class VerificationRequest {
     private String prefix;
     private String tac;
 
-    public VerificationRequest(String source, String tacFor, String countryCode, String mobileNumber, String prefix, String tac) {
+    public VerifyOTPRequest(String source, String tacFor, String countryCode, String mobileNumber, String prefix, String tac) {
         this.source = source;
         this.tacFor = tacFor;
         this.countryCode = countryCode;

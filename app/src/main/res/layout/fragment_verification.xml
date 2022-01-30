@@ -45,4 +45,9 @@
         android:text="@string/level_verify_button"
         android:textColor="@color/colorTextWhite" />
 
+    <TextView
+        android:id="@+id/TextView_Countdown_timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+
 </LinearLayout>
