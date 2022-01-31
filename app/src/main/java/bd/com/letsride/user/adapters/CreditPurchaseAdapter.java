@@ -16,16 +16,15 @@ import java.util.List;
 
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.activities.HomeActivity;
+import bd.com.letsride.user.apiResponseModels.DepositConfigData;
 import bd.com.letsride.user.bottomSheet.CreditPurchaseButtomSheet;
-import bd.com.letsride.user.models.CreditPurchaseModel;
-
 
 public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<CreditPurchaseModel> creditList = new ArrayList<CreditPurchaseModel>();
+    private List<DepositConfigData> creditList = new ArrayList<DepositConfigData>();
 
-    public CreditPurchaseAdapter(Context mContext, List<CreditPurchaseModel> allCreditList) {
+    public CreditPurchaseAdapter(Context mContext, List<DepositConfigData> allCreditList) {
         this.mContext = mContext;
         this.creditList = allCreditList;
     }
@@ -53,13 +52,13 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
         Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara_bold.ttf");
         Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara.ttf");
 
-        CreditPurchaseModel aCredit = creditList.get(position);
+        DepositConfigData aCredit = creditList.get(position);
         holder.txtAmount.setText(String.valueOf(aCredit.getAmount()));
-        if (aCredit.getBonusAmount() > 0) {
-            holder.txtBonus.setText("Bonus amount :"+String.valueOf(aCredit.getBonusAmount()));
+        if (aCredit.getBonus() > 0) {
+            holder.txtBonus.setText("Bonus amount :" + String.valueOf(aCredit.getBonus()));
         }
 
-         holder.txtAmount.setTypeface(font_bold);
+        holder.txtAmount.setTypeface(font_bold);
         holder.txtBonus.setTypeface(font_normal);
 
         holder.layoutCredit.setOnClickListener(new View.OnClickListener() {
@@ -67,14 +66,14 @@ public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAd
             public void onClick(View v) {
                 CreditPurchaseButtomSheet bottomSheet = new CreditPurchaseButtomSheet();
 
-                CreditPurchaseModel credit = creditList.get(holder.getAdapterPosition());
+                DepositConfigData credit = creditList.get(holder.getAdapterPosition());
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("current_balance", 20);
                 bundle.putInt("recharge_balance", credit.getAmount());
                 bottomSheet.setArguments(bundle);
 
-                bottomSheet.show(((HomeActivity)mContext).getSupportFragmentManager(), "ModalBottomSheet");
+                bottomSheet.show(((HomeActivity) mContext).getSupportFragmentManager(), "ModalBottomSheet");
             }
         });
     }

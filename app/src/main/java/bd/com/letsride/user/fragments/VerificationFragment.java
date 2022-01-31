@@ -50,28 +50,27 @@ public class VerificationFragment extends BaseFragment {
         etVerificationNumber = (EditText) view.findViewById(R.id.EditText_Verification_Number);
         btnVerify = (Button) view.findViewById(R.id.Button_Verify);
 
-        SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+        //SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
         //tvPrefix.setText(sendOTPData.getPrefix());
 
-        tvPrefix.setText("HBT");
-        StartTimer();
+        //StartTimer();
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (etVerificationNumber.getText().length() != 6) {
-                    requestVerificatinSuccess();
+//                if (etVerificationNumber.getText().length() != 6) {
+//                    requestVerificatinSuccess();
 
-                    if (isValid) {
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        getActivity().finish();
-                    }
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Verifaiction number must be 6 digit", Toast.LENGTH_LONG).show();
-                }
+//                if (isValid) {
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    getActivity().finish();
+            // }
+//                } else {
+//                    Toast.makeText(getActivity().getApplicationContext(), "Verifaiction number must be 6 digit", Toast.LENGTH_LONG).show();
+//                }
             }
         });
 

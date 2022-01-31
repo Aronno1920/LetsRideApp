@@ -62,7 +62,7 @@ public class LoginFragment extends BaseFragment {
                 if (txtMobileNumber.getText().length() >= 10) {
                     if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
                         try {
-                           // requestVerificationCode();
+                            requestVerificationCode();
 
                             Thread.sleep(2000);
                             FragmentManager fm = getFragmentManager();

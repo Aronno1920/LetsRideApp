@@ -1,9 +1,13 @@
 package bd.com.letsride.user.apiClasses;
 
+import java.util.List;
+
+import bd.com.letsride.user.apiResponseModels.DepositConfigResponse;
 import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
 import bd.com.letsride.user.apiRequestModels.VerifyOTPRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 import bd.com.letsride.user.apiRequestModels.SendOTPRequest;
@@ -15,6 +19,9 @@ public interface ApiInterface {
 
     @POST("Auth/VerifyOTP")
     Call<SendOTPResponse> requestVerificatinSuccess(@Body VerifyOTPRequest model);
+
+    @GET("Wallet/GetDepositConfig")
+    Call<DepositConfigResponse> GetDepositConfig();
 
 
 //    @GET("user/GetAllProduct")
