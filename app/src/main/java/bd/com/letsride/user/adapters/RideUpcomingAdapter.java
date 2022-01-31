@@ -45,8 +45,8 @@ public class RideUpcomingAdapter extends RecyclerView.Adapter<RideUpcomingAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
-        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
+        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara_bold.ttf");
+        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara.ttf");
         RideUpcomingModel myRide = myRideList.get(position);
 
         holder.txtZoneName.setText(myRide.getZoneName());

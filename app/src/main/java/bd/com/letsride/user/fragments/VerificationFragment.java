@@ -12,18 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.activities.HomeActivity;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
-import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
 import bd.com.letsride.user.apiRequestModels.VerifyOTPRequest;
 import bd.com.letsride.user.apiResponseModels.SendOTPData;
-import bd.com.letsride.user.utilities.ResponseModelDAO;
+import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
+import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,8 +51,9 @@ public class VerificationFragment extends BaseFragment {
         btnVerify = (Button) view.findViewById(R.id.Button_Verify);
 
         SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
-        tvPrefix.setText(sendOTPData.getPrefix());
+        //tvPrefix.setText(sendOTPData.getPrefix());
 
+        tvPrefix.setText("HBT");
         StartTimer();
 
         btnVerify.setOnClickListener(new View.OnClickListener() {

@@ -45,9 +45,9 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
 
     @Override
     public void onBindViewHolder(final AvailableRouteAdapter.MyViewHolder holder, int position) {
-        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_regular.ttf");
-        Typeface font_italic = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_italic.ttf");
-        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/ubuntu_bold.ttf");
+        Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara.ttf");
+        Typeface font_italic = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara_italic.ttf");
+        Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara_bold.ttf");
 
         RouteModel aRoute = routeList.get(position);
 
