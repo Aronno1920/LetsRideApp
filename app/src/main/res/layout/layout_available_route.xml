@@ -26,18 +26,20 @@
             <TextView
                 android:id="@+id/TextView_Pickup_Zone"
                 android:textColor="@color/colorTextBlue"
-                android:text="15 January, 2022"
+                android:text="Mirpur 1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"/>
-            <ImageView
-                android:src="@drawable/ic_start_end"
+
+            <TextView
+                android:text=" >>> "
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_height="15dp"/>
+                android:layout_height="wrap_content"/>
+
             <TextView
                 android:id="@+id/TextView_DropOff_Zone"
                 android:textColor="@color/colorTextBlue"
+                android:text="Police Plaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"/>
@@ -51,12 +53,12 @@
                 android:id="@+id/TextView_Via_Zone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Via Route" />
+                android:text="Via ECB" />
             <TextView
                 android:id="@+id/TextView_Zone_Description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="route description"
+                android:text="Mirpur 2, Mirpur 10, Mirpur 11, Mirpur 12, Kalshi, ECB, Banani, Gulshan 2, Gulshan 1"
                 android:textSize="12dp"/>
         </LinearLayout>
 

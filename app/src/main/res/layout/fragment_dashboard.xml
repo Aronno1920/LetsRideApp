@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/background_fragment"
     android:orientation="vertical"
-    tools:context=".fragments.DashboardFragment">
+    tools:context=".presentation.fragments.DashboardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_language"
-    tools:context=".activities.LanguageActivity">
+    tools:context=".presentation.activities.LanguageActivity">
 
     <LinearLayout
         android:orientation="horizontal"

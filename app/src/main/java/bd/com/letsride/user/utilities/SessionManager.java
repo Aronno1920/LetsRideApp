@@ -1,12 +1,10 @@
 package bd.com.letsride.user.utilities;
 
-import java.util.HashMap;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import bd.com.letsride.user.activities.LoginActivity;
+import java.util.HashMap;
 
 
 public class SessionManager {
@@ -19,7 +17,7 @@ public class SessionManager {
     private static final String IS_SET_LANGUAGE = "false";
     private static final String IS_LOGIN = "IsLoggedIn";
 
-    //User Information as Session
+//User Information as Session
 //    public static final String KEY_REGID = "id";
 //    public static final String KEY_LOGIN_ID = "emp_id";
 //    public static final String KEY_NAME = "name";

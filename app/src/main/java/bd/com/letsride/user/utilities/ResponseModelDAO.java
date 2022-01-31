@@ -2,7 +2,8 @@ package bd.com.letsride.user.utilities;
 
 import org.json.JSONException;
 
-import bd.com.letsride.user.apiResponseModels.SendOTPData;
+import bd.com.letsride.user.models.responseModels.SendOTPData;
+import bd.com.letsride.user.models.responseModels.VerifyOTPData;
 
 public class ResponseModelDAO {
 
@@ -20,4 +21,16 @@ public class ResponseModelDAO {
         return (SendOTPData) modelManager.getObject("SendOTPData");
     }
 
+
+    public void addVerifyOTPResponseToDAO(VerifyOTPData verifyOTPData) {
+        try {
+            modelManager.addToJson(verifyOTPData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public VerifyOTPData getVerifyOTPResponse() {
+        return (VerifyOTPData) modelManager.getObject("VerifyOTPData");
+    }
 }

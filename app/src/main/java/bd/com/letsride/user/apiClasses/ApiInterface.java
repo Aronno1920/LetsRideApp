@@ -1,16 +1,16 @@
 package bd.com.letsride.user.apiClasses;
 
-import java.util.List;
-
-import bd.com.letsride.user.apiResponseModels.DepositConfigResponse;
-import bd.com.letsride.user.apiResponseModels.SendOTPResponse;
-import bd.com.letsride.user.apiRequestModels.VerifyOTPRequest;
+import bd.com.letsride.user.models.requestModels.SendOTPRequest;
+import bd.com.letsride.user.models.requestModels.VerifyOTPRequest;
+import bd.com.letsride.user.models.responseModels.DepositConfigResponse;
+import bd.com.letsride.user.models.responseModels.SendOTPResponse;
+import bd.com.letsride.user.models.responseModels.UserInfoResponse;
+import bd.com.letsride.user.models.responseModels.VerifyOTPResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-
-import bd.com.letsride.user.apiRequestModels.SendOTPRequest;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -18,18 +18,14 @@ public interface ApiInterface {
     Call<SendOTPResponse> requestVerificatinCode(@Body SendOTPRequest model);
 
     @POST("Auth/VerifyOTP")
-    Call<SendOTPResponse> requestVerificatinSuccess(@Body VerifyOTPRequest model);
+    Call<VerifyOTPResponse> requestVerificatinSuccess(@Body VerifyOTPRequest model);
 
     @GET("Wallet/GetDepositConfig")
     Call<DepositConfigResponse> GetDepositConfig();
 
-
-//    @GET("user/GetAllProduct")
-//    Call<List<ProductModel>> GetAllProductList();
-//
-//    @GET("user/GetAllTerminology")
-//    Call<List<TerminologyModel>> GetAllTerminology();
-//
-//    @GET("user/GetAllActionDetails")
-//    Call<List<ActionDetailsModel>> GetAllActionDetailsList();
+    @POST("user/Login")
+    Call<UserInfoResponse> GetUserInformation(
+            @Query("ownerType") String ownerType,
+            @Query("userName") String userName
+    );
 }

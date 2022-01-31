@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bd.com.letsride.user.R;
-import bd.com.letsride.user.activities.HomeActivity;
-import bd.com.letsride.user.apiResponseModels.DepositConfigData;
-import bd.com.letsride.user.bottomSheet.CreditPurchaseButtomSheet;
+import bd.com.letsride.user.presentation.activities.HomeActivity;
+import bd.com.letsride.user.models.responseModels.DepositConfigData;
+import bd.com.letsride.user.presentation.bottomSheet.CreditPurchaseButtomSheet;
 
 public class CreditPurchaseAdapter extends RecyclerView.Adapter<CreditPurchaseAdapter.MyViewHolder> {
 

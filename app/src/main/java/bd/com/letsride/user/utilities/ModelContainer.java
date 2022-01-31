@@ -2,10 +2,13 @@ package bd.com.letsride.user.utilities;
 
 import com.google.gson.GsonBuilder;
 
-import bd.com.letsride.user.apiResponseModels.SendOTPData;
+import bd.com.letsride.user.models.responseModels.SendOTPData;
+import bd.com.letsride.user.models.responseModels.VerifyOTPData;
 
 public class ModelContainer {
     SendOTPData sendOTPData;
+    VerifyOTPData verifyOTPData;
+
 
     public SendOTPData getSendOTPResponse() {
         return sendOTPData;
@@ -13,6 +16,15 @@ public class ModelContainer {
 
     public void setSendOTPResponse(SendOTPData sendOTPData) {
         this.sendOTPData = sendOTPData;
+    }
+
+
+    public VerifyOTPData getVerifyOTPResponse() {
+        return verifyOTPData;
+    }
+
+    public void setVerifyOTPResponse(VerifyOTPData verifyOTPData) {
+        this.verifyOTPData = verifyOTPData;
     }
 
 
