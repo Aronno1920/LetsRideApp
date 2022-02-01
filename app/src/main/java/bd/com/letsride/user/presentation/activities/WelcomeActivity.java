@@ -20,7 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.utilities.BaseActivity;
-import bd.com.letsride.user.utilities.PrefManager;
+import bd.com.letsride.user.utilities.SessionManager;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -30,15 +30,15 @@ public class WelcomeActivity extends BaseActivity {
     private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
-    private PrefManager prefManager;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Checking for first time launch - before calling setContentView()
-        prefManager = new PrefManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
+        session = new SessionManager(this);
+        if (!session.isFirstTimeLaunch()) {
             launchHomeScreen();
             finish();
         }
@@ -99,20 +99,17 @@ public class WelcomeActivity extends BaseActivity {
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
 
-        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
-        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
-
         dotsLayout.removeAllViews();
        for (int i = 0; i < dots.length; i++) {
             dots[0] = new TextView(this);
             dots[0].setText(Html.fromHtml("&#8226;"));
             dots[0].setTextSize(35);
-            dots[0].setTextColor(colorsInactive[currentPage]);
+            dots[0].setTextColor(getResources().getColor(R.color.dot_color_inactive));
             dotsLayout.addView(dots[0]);
         }
 
         if (dots.length > 0)
-            dots[currentPage].setTextColor(colorsActive[currentPage]);
+            dots[currentPage].setTextColor(getResources().getColor(R.color.dot_color_active));
     }
 
     private int getItem(int i) {
@@ -120,7 +117,7 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
+        session.setFirstTimeLaunch(false);
         startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
         finish();
     }

@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@color/colorTextBlue"
+            android:background="@color/colorTextGray"
             android:orientation="horizontal"
             android:paddingTop="25dp"
             android:paddingBottom="15dp">
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Upcoming Rides"
-                android:textColor="@color/colorTextBlue"
+                android:textColor="@color/colorTextGray"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="Book Single"
-                android:textColor="@color/colorTextBlue"
+                android:textColor="@color/colorTextGray"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Offers"
-                android:textColor="@color/colorTextBlue"
+                android:textColor="@color/colorTextGray"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Refer &amp; Earn"
-                android:textColor="@color/colorTextBlue"
+                android:textColor="@color/colorTextGray"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

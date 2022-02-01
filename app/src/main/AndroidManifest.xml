@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Fab_LetsRide_bar"
         android:usesCleartextTraffic="false">
         <activity
-            android:name=".presentation.activities.SplashActivity"
+            android:name=".presentation.activities.RegistrationActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.activities.HomeActivity"
@@ -34,22 +34,8 @@
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
 
-        <activity
-            android:name=".presentation.activities.RegistrationActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-
-
 <!--        <activity-->
-<!--            android:name=".presentation.activities.SplashActivity"-->
+<!--            android:name=".presentation.activities.RegistrationActivity"-->
 <!--            android:exported="true"-->
 <!--            android:theme="@style/Theme.Design.Light.NoActionBar">-->
 <!--            <intent-filter>-->
@@ -58,6 +44,17 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
 <!--        </activity>-->
+
+        <activity
+            android:name=".presentation.activities.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

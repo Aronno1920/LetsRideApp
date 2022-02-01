@@ -16,6 +16,7 @@ public class SessionManager {
     private static final String PREF_NAME = "OrionPMH_Pref";
     private static final String IS_SET_LANGUAGE = "false";
     private static final String IS_LOGIN = "IsLoggedIn";
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
 //User Information as Session
 //    public static final String KEY_REGID = "id";
@@ -100,5 +101,14 @@ public class SessionManager {
 
     public boolean IsSetLanguage() {
         return pref.getBoolean(IS_SET_LANGUAGE, false);
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 }

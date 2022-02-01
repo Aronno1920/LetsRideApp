@@ -26,7 +26,6 @@ import retrofit2.Callback;
 
 public class LoginFragment extends BaseFragment {
 
-    TextView tvSignUp;
     Button btnLogin;
     EditText txtMobileNumber;
 

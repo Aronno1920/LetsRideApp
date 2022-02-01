@@ -29,7 +29,7 @@ public class SendOTPResponse {
     @Expose
     private Object exception;
 
-    public SendOTPData getData() {
+    public SendOTPData getSendOTPData() {
         return data;
     }
 

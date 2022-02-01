@@ -25,7 +25,7 @@
 
             <TextView
                 android:id="@+id/TextView_Pickup_Zone"
-                android:textColor="@color/colorTextBlue"
+                android:textColor="@color/colorTextGray"
                 android:text="Mirpur 1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
 
             <TextView
                 android:id="@+id/TextView_DropOff_Zone"
-                android:textColor="@color/colorTextBlue"
+                android:textColor="@color/colorTextGray"
                 android:text="Police Plaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
