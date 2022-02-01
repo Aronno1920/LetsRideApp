@@ -5,14 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class UserInfoResponse {
+public class SaveUserPesponse {
 
-    @SerializedName("data")
-    @Expose
-    private UserInfoData data;
     @SerializedName("errors")
     @Expose
-    private List<Object> errors = null;
+    private List<ErrorData> errors = null;
     @SerializedName("failed")
     @Expose
     private Boolean failed;
@@ -29,31 +26,52 @@ public class UserInfoResponse {
     @Expose
     private Object exception;
 
-    public UserInfoData getData() {
-        return data;
+    public List<ErrorData> getErrors() {
+        return errors;
     }
 
-    public List<Object> getErrors() {
-        return errors;
+    public void setErrors(List<ErrorData> errors) {
+        this.errors = errors;
     }
 
     public Boolean getFailed() {
         return failed;
     }
 
+    public void setFailed(Boolean failed) {
+        this.failed = failed;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getMessageWithErrors() {
         return messageWithErrors;
     }
 
+    public void setMessageWithErrors(String messageWithErrors) {
+        this.messageWithErrors = messageWithErrors;
+    }
+
     public Boolean getSucceeded() {
         return succeeded;
+    }
+
+    public void setSucceeded(Boolean succeeded) {
+        this.succeeded = succeeded;
     }
 
     public Object getException() {
         return exception;
     }
+
+    public void setException(Object exception) {
+        this.exception = exception;
+    }
+
 }

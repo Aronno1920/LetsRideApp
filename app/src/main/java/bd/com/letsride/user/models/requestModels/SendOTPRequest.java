@@ -12,4 +12,12 @@ public class SendOTPRequest {
         this.countryCode = countryCode;
         this.mobileNumber = mobileNumber;
     }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
 }

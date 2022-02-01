@@ -55,4 +55,12 @@ public class SendOTPData {
     public String getMobileNumber() {
         return mobileNumber;
     }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 }

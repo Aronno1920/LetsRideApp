@@ -20,14 +20,7 @@
         android:layout_marginBottom="10dp"/>
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/level_mobile_number"
-        android:textSize="15sp"
-
-        android:background="@drawable/style_edittext" />
-
-    <EditText
+        android:id="@+id/EditText_First_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_first_name"
@@ -36,6 +29,7 @@
         android:background="@drawable/style_edittext" />
 
     <EditText
+        android:id="@+id/EditText_Last_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_last_name"
@@ -44,11 +38,30 @@
         android:background="@drawable/style_edittext" />
 
     <EditText
+        android:id="@+id/EditText_Email_Address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/level_email_address"
         android:layout_marginTop="10dp"
         android:textSize="15sp"
         android:background="@drawable/style_edittext" />
+
+    <EditText
+        android:id="@+id/EditText_Web_Password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password for Web"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:background="@drawable/style_edittext" />
+
+    <Button
+        android:id="@+id/Button_UpdateProfile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:text="Update Profile"
+        android:textColor="@color/colorTextWhite" />
 
 </LinearLayout>

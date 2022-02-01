@@ -83,8 +83,7 @@ public class WelcomeActivity extends BaseActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // checking for last page
-                // if last page home screen will be launched
+                // checking for last page, if last page home screen will be launched
                 int current = getItem(+1);
                 if (current < layouts.length) {
                     // move to next screen
@@ -100,12 +99,12 @@ public class WelcomeActivity extends BaseActivity {
         dots = new TextView[layouts.length];
 
         dotsLayout.removeAllViews();
-       for (int i = 0; i < dots.length; i++) {
-            dots[0] = new TextView(this);
-            dots[0].setText(Html.fromHtml("&#8226;"));
-            dots[0].setTextSize(35);
-            dots[0].setTextColor(getResources().getColor(R.color.dot_color_inactive));
-            dotsLayout.addView(dots[0]);
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(getResources().getColor(R.color.dot_color_inactive));
+            dotsLayout.addView(dots[i]);
         }
 
         if (dots.length > 0)

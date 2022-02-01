@@ -64,7 +64,7 @@ public class CreditFragment extends BaseFragment {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<DepositConfigResponse> call = apiService.GetDepositConfig();
+            Call<DepositConfigResponse> call = apiService.requestAllDepositConfig();
             call.enqueue(new Callback<DepositConfigResponse>() {
                 @Override
                 public void onResponse(Call<DepositConfigResponse> call, retrofit2.Response<DepositConfigResponse> response) {

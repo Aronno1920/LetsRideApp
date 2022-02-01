@@ -72,16 +72,17 @@ public class VerificationFragment extends BaseFragment {
         btnVerify = (Button) view.findViewById(R.id.Button_Verify);
 
         SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
-        tvPrefix.setText(sendOTPData.getPrefix());
+        tvPrefix.setText(sendOTPData.getPrefix()+" - ");
     }
 
     private void requestVerificatinSuccess() {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
-            VerifyOTPRequest otpRequest = new VerifyOTPRequest("Mobile", "Authentication", "+88", "", tvPrefix.getText().toString(), etVerificationNumber.getText().toString());
+            SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+            VerifyOTPRequest otpRequest = new VerifyOTPRequest("Mobile", "Authentication", sendOTPData.getCountryCode(), sendOTPData.getMobileNumber(), sendOTPData.getPrefix(), etVerificationNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<VerifyOTPResponse> call = apiService.requestVerificatinSuccess(otpRequest);
+            Call<VerifyOTPResponse> call = apiService.verifyOTPSuccess(otpRequest);
             call.enqueue(new Callback<VerifyOTPResponse>() {
                 @Override
                 public void onResponse(Call<VerifyOTPResponse> call, retrofit2.Response<VerifyOTPResponse> response) {
@@ -109,15 +110,12 @@ public class VerificationFragment extends BaseFragment {
 
     private void StartTimer() {
         new CountDownTimer(120000, 1000) {
-
             public void onTick(long millisUntilFinished) {
                 tvTimer.setText("Seconds remaining: " + millisUntilFinished / 1000 + "s");
             }
-
             public void onFinish() {
                 tvTimer.setText("Don't receive? Send again");
             }
-
         }.start();
     }
 

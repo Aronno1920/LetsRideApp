@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import bd.com.letsride.user.R;
@@ -50,6 +49,7 @@ public class LoginFragment extends BaseFragment {
 
                 if (txtMobileNumber.getText().length() >= 10) {
                     if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
+
                         requestVerificationCode();
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Mobile Number is not valid", Toast.LENGTH_LONG).show();
@@ -75,7 +75,7 @@ public class LoginFragment extends BaseFragment {
             SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Authentication", "+88", txtMobileNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<SendOTPResponse> call = apiService.requestVerificatinCode(otpRequest);
+            Call<SendOTPResponse> call = apiService.requestVerificationCode(otpRequest);
             call.enqueue(new Callback<SendOTPResponse>() {
                 @Override
                 public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
@@ -83,11 +83,13 @@ public class LoginFragment extends BaseFragment {
 
                         //Store API Response to Temporary memory
                         SendOTPData myOTP = response.body().getSendOTPData();
+                        myOTP.setCountryCode(otpRequest.getCountryCode());
+                        myOTP.setMobileNumber(otpRequest.getMobileNumber());
                         new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
 
                         redirectToVerifyPage();
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Hoynai", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
