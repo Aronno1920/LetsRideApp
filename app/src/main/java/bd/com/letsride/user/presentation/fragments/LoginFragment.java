@@ -69,7 +69,7 @@ public class LoginFragment extends BaseFragment {
         fragmentTransaction.commit();
     }
 
-    private void requestVerificationCode() {
+ private void requestVerificationCode() {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Authentication", "+88", txtMobileNumber.getText().toString());
@@ -86,6 +86,12 @@ public class LoginFragment extends BaseFragment {
                         myOTP.setCountryCode(otpRequest.getCountryCode());
                         myOTP.setMobileNumber(otpRequest.getMobileNumber());
                         new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
+
+                        try {
+                            Thread.sleep(3000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
                         redirectToVerifyPage();
                     } else {

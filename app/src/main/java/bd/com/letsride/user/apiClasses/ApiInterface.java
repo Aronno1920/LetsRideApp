@@ -11,6 +11,7 @@ import bd.com.letsride.user.models.responseModels.VerifyOTPResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -26,9 +27,9 @@ public interface ApiInterface {
     Call<SaveUserPesponse> requestUserProfileSave(@Body SaveUserRequest model);
 
 
-
     @POST("Auth/GetUserByName")
     Call<UserProfileResponse> requestUserProfile(
+            @Header("Authorization") String token,
             @Query("ownerType") String ownerType,
             @Query("userName") String userName
     );

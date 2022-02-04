@@ -17,17 +17,13 @@ public class SessionManager {
     private static final String IS_SET_LANGUAGE = "false";
     private static final String IS_LOGIN = "IsLoggedIn";
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    private static final String USER_TOKEN = "user_token";
 
 //User Information as Session
 //    public static final String KEY_REGID = "id";
 //    public static final String KEY_LOGIN_ID = "emp_id";
 //    public static final String KEY_NAME = "name";
 //    public static final String KEY_DESIGNATION = "designation";
-//    public static final String KEY_LOCATION = "location";
-//    public static final String KEY_COMPANY = "company";
-//    public static final String KEY_PHOTOPATH = "photopath";
-//    public static final String KEY_VERSION_CODE = "0";
-//    public static final String KEY_VERSION_NAME = "0";
     public static final String KEY_DEFAULT_LANGUAGE="en";
 
 
@@ -110,5 +106,15 @@ public class SessionManager {
 
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
+    public void saveAuthToken(String token) {
+        editor.putString(USER_TOKEN, token);
+        editor.commit();
+    }
+
+    public String fetchAuthToken()
+    {
+        return pref.getString(USER_TOKEN, null);
     }
 }

@@ -33,55 +33,27 @@ public class UserProfileResponse {
         return data;
     }
 
-    public void setUserProfileData(UserProfileData data) {
-        this.data = data;
-    }
-
     public List<Object> getErrors() {
         return errors;
-    }
-
-    public void setErrors(List<Object> errors) {
-        this.errors = errors;
     }
 
     public Boolean getFailed() {
         return failed;
     }
 
-    public void setFailed(Boolean failed) {
-        this.failed = failed;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getMessageWithErrors() {
         return messageWithErrors;
     }
 
-    public void setMessageWithErrors(String messageWithErrors) {
-        this.messageWithErrors = messageWithErrors;
-    }
-
     public Boolean getSucceeded() {
         return succeeded;
     }
 
-    public void setSucceeded(Boolean succeeded) {
-        this.succeeded = succeeded;
-    }
-
     public Object getException() {
         return exception;
-    }
-
-    public void setException(Object exception) {
-        this.exception = exception;
     }
 }

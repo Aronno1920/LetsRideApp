@@ -23,12 +23,14 @@ import bd.com.letsride.user.presentation.activities.HomeActivity;
 import bd.com.letsride.user.presentation.activities.RegistrationActivity;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.ResponseModelDAO;
+import bd.com.letsride.user.utilities.SessionManager;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
 
 public class VerificationFragment extends BaseFragment {
 
+    SessionManager session;
     TextView tvPrefix, tvTimer;
     EditText etVerificationNumber;
     Button btnVerify;
@@ -45,6 +47,7 @@ public class VerificationFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_verification, container, false);
+        session = new SessionManager(getActivity().getApplicationContext());
 
         InitializationViews();
 
@@ -92,6 +95,7 @@ public class VerificationFragment extends BaseFragment {
                         VerifyOTPData myVerify = response.body().getVerifyOTPData();
                         new ResponseModelDAO().addVerifyOTPResponseToDAO(myVerify);
 
+                        session.saveAuthToken(myVerify.getToken());
                         redirectedToHomeOrRegistrionPage(myVerify.getProfileUpdated());
                     }
                     else

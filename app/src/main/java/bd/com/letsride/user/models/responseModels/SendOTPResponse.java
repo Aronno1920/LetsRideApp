@@ -12,7 +12,7 @@ public class SendOTPResponse {
     private SendOTPData data;
     @SerializedName("errors")
     @Expose
-    private List<Object> errors = null;
+    private List<ErrorData> errors = null;
     @SerializedName("failed")
     @Expose
     private Boolean failed;
@@ -33,7 +33,7 @@ public class SendOTPResponse {
         return data;
     }
 
-    public List<Object> getErrors() {
+    public List<ErrorData> getErrors() {
         return errors;
     }
 
