@@ -27,7 +27,7 @@ public interface ApiInterface {
     Call<SaveUserPesponse> requestUserProfileSave(@Body SaveUserRequest model);
 
 
-    @POST("Auth/GetUserByName")
+    @GET("Auth/GetUserByName")
     Call<UserProfileResponse> requestUserProfile(
             @Header("Authorization") String token,
             @Query("ownerType") String ownerType,
@@ -37,4 +37,6 @@ public interface ApiInterface {
 
     @GET("Wallet/GetDepositConfig")
     Call<DepositConfigResponse> requestAllDepositConfig();
+
+
 }

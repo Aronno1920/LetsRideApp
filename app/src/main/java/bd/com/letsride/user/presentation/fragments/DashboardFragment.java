@@ -1,12 +1,17 @@
 package bd.com.letsride.user.presentation.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +30,9 @@ import bd.com.letsride.user.models.responseModels.UserProfileResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
 import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.SessionManager;
+import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardFragment extends BaseFragment {
@@ -46,6 +53,8 @@ public class DashboardFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
     }
 
+    ViewGroup container;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -54,75 +63,46 @@ public class DashboardFragment extends BaseFragment {
         tvUserName = view.findViewById(R.id.TextVew_UserName);
         tvReferCode = view.findViewById(R.id.TextVew_ReferalCode);
 
-        LoadUpcomingRide(container);
-
-        UserProfileTask profile = new UserProfileTask();
-        profile.execute();
+        this.container = container;
 
         return view;
     }
 
-    private class UserProfileTask extends AsyncTask<Void, Void, UserProfileData> {
-        private UserProfileData userProfile;
-        //ProgressDialog progressDialog;
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        @Override
-        protected void onPreExecute() {
-            //progressDialog = ProgressDialog.show(getActivity()., "ProgressDialog", "Please wait...");
-        }
-
-        @Override
-        protected UserProfileData doInBackground(Void... voids) {
-            try {
-                SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
-                ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-                Call<UserProfileResponse> callSync = apiService.requestUserProfile("Bearer"+" "+session.fetchAuthToken(),"Rider", sendOTPData.getMobileNumber().toString());
-
-                Response<UserProfileResponse> response = callSync.execute();
-                userProfile = response.body().getUserProfileData();
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-            return userProfile;
-        }
-
-        @Override
-        protected void onPostExecute(UserProfileData userProfile) {
-            //progressDialog.dismiss();
-            if(userProfile!=null)
-            {
-                tvUserName.setText(userProfile.getFirstName() + " " + userProfile.getLastName());
-                tvReferCode.setText(userProfile.getReferralCode().toString());
-            }
-        }
+        LoadUpcomingRide(container);
+        LoadUserProfile();
     }
 
-    /*   private void LoadUserProfile() {
+    private void LoadUserProfile() {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<UserProfileResponse> call = apiService.requestUserProfile("Rider",sendOTPData.getMobileNumber().toString());
+            Call<UserProfileResponse> call = apiService.requestUserProfile("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
+            Log.d("Dashboard", "LoadUserProfile: " + call.toString());
             call.enqueue(new Callback<UserProfileResponse>() {
+
+                @SuppressLint("SetTextI18n")
                 @Override
-                public void onResponse(Call<UserProfileResponse> call, retrofit2.Response<UserProfileResponse> response) {
-                    if (response.body().getSucceeded()) {
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                public void onResponse(@NonNull Call<UserProfileResponse> call, @NonNull retrofit2.Response<UserProfileResponse> response) {
+
+                    if (response.body() != null) {
+                        if (response.body().getSucceeded()) {
+                            //Store API Response to Temporary memory
+                            UserProfileData info = response.body().getUserProfileData();
+                            tvUserName.setText(info.getFirstName() + " " + info.getLastName());
+                            tvReferCode.setText(info.getReferralCode().toString());
+
+                            //new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
-                        //Store API Response to Temporary memory
-                        UserProfileData info = response.body().getUserProfileData();
-                        tvUserName.setText(info.getFirstName()+" "+info.getLastName());
-                        tvReferCode.setText(info.getReferralCode().toString());
-
-                        //new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Response not found", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -132,7 +112,7 @@ public class DashboardFragment extends BaseFragment {
                 }
             });
         }
-    }*/
+    }
 
     private void LoadUpcomingRide(ViewGroup container) {
         rideDetailsList = GetAllRideDetails();

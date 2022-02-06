@@ -28,20 +28,30 @@ public class ApiClient {
 
     public static final String BASE_URL = "https://services.lrpanel.com/api/";
     private static Retrofit retrofit = null;
-    private static OkHttpClient okHttpClient;
+    private static OkHttpClient okHttp;
 
     public static Retrofit getClient(Context context) {
         try {
-            if (okHttpClient == null) {
-                initOkHttpClient();
-            }
 
             if (retrofit == null) {
                 synchronized (ApiClient.class) {
                     if (retrofit == null) {
                         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(BASE_URL);
-                        OkHttpClient okHttp = new OkHttpClient.Builder()
+                        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                            @Override
+                            public void log(String message) {
+                                Log.d("letsride", "OkHttp====Message:" + message);
+                            }
+                        });
+
+
+                        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                        interceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+                        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+                        okHttp = new OkHttpClient.Builder()
                                 .sslSocketFactory(getSSLConfig(context).getSocketFactory())
+                                .addInterceptor(interceptor)
                                 .build();
 
                         if (retrofit == null) {
@@ -67,16 +77,6 @@ public class ApiClient {
         return retrofit;
     }
 
-    private static void initOkHttpClient() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.e("NETWORKRESPONSE", message);
-            }
-        });
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        okHttpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-    }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private static SSLContext getSSLConfig(Context context) throws CertificateException, IOException,
