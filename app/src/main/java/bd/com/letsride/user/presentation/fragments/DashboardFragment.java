@@ -1,7 +1,6 @@
 package bd.com.letsride.user.presentation.fragments;
 
 import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import bd.com.letsride.user.R;
@@ -33,12 +33,11 @@ import bd.com.letsride.user.utilities.SessionManager;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class DashboardFragment extends BaseFragment {
 
     View view;
-    TextView tvUserName, tvReferCode;
+    TextView tvUserName, tvReferCode, tvGreeting;
     private RecyclerView recyclerView;
     private List<RideUpcomingModel> rideDetailsList;
     private RideUpcomingAdapter rideAdapter;
@@ -60,7 +59,8 @@ public class DashboardFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         session = new SessionManager(getActivity().getApplicationContext());
 
-        tvUserName = view.findViewById(R.id.TextVew_UserName);
+        tvGreeting=view.findViewById(R.id.TextView_Greetings);
+        tvUserName = view.findViewById(R.id.TextView_UserName);
         tvReferCode = view.findViewById(R.id.TextVew_ReferalCode);
 
         this.container = container;
@@ -74,6 +74,20 @@ public class DashboardFragment extends BaseFragment {
 
         LoadUpcomingRide(container);
         LoadUserProfile();
+        tvGreeting.setText(setGreetingMessage());
+    }
+
+    private String setGreetingMessage() {
+        int timeNow = Calendar.getInstance().getTime().getHours();
+        if ((timeNow <= 5) && (timeNow <= 12)) {
+            return "Good Morning";
+        } else if ((timeNow > 12) && (timeNow <= 16)) {
+            return "Good Afternoon";
+        } else if ((timeNow > 16) && (timeNow < 20)) {
+            return "Good Evening";
+        } else {
+            return "Good Night";
+        }
     }
 
     private void LoadUserProfile() {

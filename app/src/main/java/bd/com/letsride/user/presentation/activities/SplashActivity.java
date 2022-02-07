@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import bd.com.letsride.user.R;
+import bd.com.letsride.user.utilities.BaseActivity;
 import bd.com.letsride.user.utilities.SessionManager;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     ImageView iLogo;
     SessionManager session;
@@ -26,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
 
         session = new SessionManager(getApplicationContext());
         iLogo = (ImageView) findViewById(R.id.ImageView_AppLogo);
-       // logoAnimation();
 
         Thread timerThread = new Thread() {
             public void run() {
@@ -62,11 +62,5 @@ public class SplashActivity extends AppCompatActivity {
     private boolean CheckUserLoginStatus() {
         //return session.isLoggedIn();
         return false;
-    }
-
-    private void logoAnimation() {
-        Animation animZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in);
-        iLogo.setVisibility(View.VISIBLE);
-        iLogo.startAnimation(animZoomIn);
     }
 }
