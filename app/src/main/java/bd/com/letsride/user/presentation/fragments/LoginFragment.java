@@ -2,6 +2,7 @@ package bd.com.letsride.user.presentation.fragments;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +19,12 @@ import bd.com.letsride.user.models.requestModels.SendOTPRequest;
 import bd.com.letsride.user.models.responseModels.SendOTPData;
 import bd.com.letsride.user.models.responseModels.SendOTPResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
+import bd.com.letsride.user.utilities.ProgressDialogHelper;
 import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginFragment extends BaseFragment {
 
@@ -50,6 +53,7 @@ public class LoginFragment extends BaseFragment {
                 if (txtMobileNumber.getText().length() >= 10) {
                     if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
 
+                        ProgressDialogHelper.ShowDialog(getActivity(), "text", "Sending OTP..,");
                         requestVerificationCode();
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Mobile Number is not valid", Toast.LENGTH_LONG).show();
@@ -69,7 +73,8 @@ public class LoginFragment extends BaseFragment {
         fragmentTransaction.commit();
     }
 
- private void requestVerificationCode() {
+
+    private void requestVerificationCode() {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Authentication", "+88", txtMobileNumber.getText().toString());
@@ -79,31 +84,34 @@ public class LoginFragment extends BaseFragment {
             call.enqueue(new Callback<SendOTPResponse>() {
                 @Override
                 public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
-                    if (response.body().getSucceeded()) {
-
-                        //Store API Response to Temporary memory
-                        SendOTPData myOTP = response.body().getSendOTPData();
-                        myOTP.setCountryCode(otpRequest.getCountryCode());
-                        myOTP.setMobileNumber(otpRequest.getMobileNumber());
-                        new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
-
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                    try {
+                        if (response.body().getSucceeded()) {
+                            responseHandling(response.body());
+                            redirectToVerifyPage();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
-                        redirectToVerifyPage();
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        ProgressDialogHelper.DismissDialog();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<SendOTPResponse> call, Throwable t) {
                     Log.d("A1920:Error", t.getMessage());
+                    ProgressDialogHelper.DismissDialog();
                 }
             });
         }
+    }
+
+    private void responseHandling(SendOTPResponse response) {
+        SendOTPData myOTP = response.getSendOTPData();
+        myOTP.setCountryCode(myOTP.getCountryCode());
+        myOTP.setMobileNumber(myOTP.getMobileNumber());
+        new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
+
     }
 }

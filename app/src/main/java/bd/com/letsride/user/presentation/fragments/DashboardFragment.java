@@ -59,7 +59,7 @@ public class DashboardFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         session = new SessionManager(getActivity().getApplicationContext());
 
-        tvGreeting=view.findViewById(R.id.TextView_Greetings);
+        tvGreeting=view.findViewById(R.id.TextView_Greeting);
         tvUserName = view.findViewById(R.id.TextView_UserName);
         tvReferCode = view.findViewById(R.id.TextVew_ReferalCode);
 
