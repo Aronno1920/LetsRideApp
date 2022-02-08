@@ -31,8 +31,7 @@
             android:gravity="right"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="15dp"
-            android:text="₹435.00" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -55,8 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:textSize="15dp"
-            android:text="₹435.00" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -78,8 +76,7 @@
             android:gravity="right"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="15dp"
-            android:text="₹435.00" />
+            android:textSize="15dp" />
     </LinearLayout>
 
     <TextView
@@ -100,12 +97,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:textColor="@color/colorWhite"
         android:text="PROCEED PAYMENT" />
 
     <Button
         android:id="@+id/course_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PAY LATEDR" />
+        android:textColor="@color/colorLightGrey"
+        android:text="PAY LATER" />
 
 </LinearLayout>

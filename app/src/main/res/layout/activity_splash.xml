@@ -22,7 +22,7 @@
         android:textSize="30sp"
         android:textAllCaps="true"
         android:textFontWeight="600"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryMarron"
         android:textAlignment="center"/>
 
     <TextView
@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:text="Easy &amp; Safe"
         android:textSize="20sp"
-        android:textColor="@color/colorPrimaryVariant"
+        android:textColor="@color/colorPrimaryLightGrey"
         android:textAlignment="center"/>
 </LinearLayout>

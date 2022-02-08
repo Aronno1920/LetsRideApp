@@ -1,11 +1,12 @@
 package bd.com.letsride.user.presentation.fragments;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.load.model.ImageVideoWrapper;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +31,7 @@ import bd.com.letsride.user.models.responseModels.SendOTPData;
 import bd.com.letsride.user.models.responseModels.UserProfileData;
 import bd.com.letsride.user.models.responseModels.UserProfileResponse;
 import bd.com.letsride.user.utilities.BaseFragment;
+import bd.com.letsride.user.utilities.ProgressDialogHelper;
 import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.SessionManager;
 import bd.com.letsride.user.utilities.UtilityClass;
@@ -38,6 +42,7 @@ public class DashboardFragment extends BaseFragment {
 
     View view;
     TextView tvUserName, tvReferCode, tvGreeting;
+    Button btnShareCode;
     private RecyclerView recyclerView;
     private List<RideUpcomingModel> rideDetailsList;
     private RideUpcomingAdapter rideAdapter;
@@ -58,12 +63,25 @@ public class DashboardFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         session = new SessionManager(getActivity().getApplicationContext());
+        this.container = container;
 
-        tvGreeting=view.findViewById(R.id.TextView_Greeting);
+        tvGreeting = view.findViewById(R.id.TextView_Greeting);
         tvUserName = view.findViewById(R.id.TextView_UserName);
         tvReferCode = view.findViewById(R.id.TextVew_ReferalCode);
+        btnShareCode = view.findViewById(R.id.Button_Share_Refer_Code);
 
-        this.container = container;
+        btnShareCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Get 100% off on your first move at Let's Ride. To accept, register and use the refer code: "+tvReferCode.getText()+"\n\nDownload now: https://developer.android.com/training/sharing/");
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
 
         return view;
     }
@@ -74,9 +92,15 @@ public class DashboardFragment extends BaseFragment {
 
         LoadUpcomingRide(container);
         LoadUserProfile();
+
+        StoreUserDataToSharedPref();
         tvGreeting.setText(setGreetingMessage());
     }
-
+    private void StoreUserDataToSharedPref()
+    {
+        UserProfileData info = new ResponseModelDAO().getUserProfileResponse();
+        session.createLoginSession(info.getUserId(),info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
+    }
     private String setGreetingMessage() {
         int timeNow = Calendar.getInstance().getTime().getHours();
         if ((timeNow <= 5) && (timeNow <= 12)) {
@@ -94,35 +118,39 @@ public class DashboardFragment extends BaseFragment {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+            ProgressDialogHelper.ShowDialog(getActivity(), "", "Profile loading...");
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
             Call<UserProfileResponse> call = apiService.requestUserProfile("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
-            Log.d("Dashboard", "LoadUserProfile: " + call.toString());
             call.enqueue(new Callback<UserProfileResponse>() {
-
-                @SuppressLint("SetTextI18n")
                 @Override
                 public void onResponse(@NonNull Call<UserProfileResponse> call, @NonNull retrofit2.Response<UserProfileResponse> response) {
+                    try {
+                        if (response.body() != null) {
+                            if (response.body().getSucceeded()) {
 
-                    if (response.body() != null) {
-                        if (response.body().getSucceeded()) {
-                            //Store API Response to Temporary memory
-                            UserProfileData info = response.body().getUserProfileData();
-                            tvUserName.setText(info.getFirstName() + " " + info.getLastName());
-                            tvReferCode.setText(info.getReferralCode().toString());
+                                UserProfileData info = response.body().getUserProfileData();
+                                tvUserName.setText(info.getFirstName() + " " + info.getLastName());
+                                tvReferCode.setText(info.getReferralCode().toString());
 
-                            //new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
+                                new ResponseModelDAO().addUserProfileResponseToDAO(info);
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
-                            Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Response not found", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Response not found", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        ProgressDialogHelper.DismissDialog();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<UserProfileResponse> call, Throwable t) {
                     Log.d("A1920:Error", t.getMessage());
+                    ProgressDialogHelper.DismissDialog();
                 }
             });
         }

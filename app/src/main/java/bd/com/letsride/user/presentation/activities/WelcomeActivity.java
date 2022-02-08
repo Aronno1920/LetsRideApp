@@ -103,12 +103,12 @@ public class WelcomeActivity extends BaseActivity {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.dot_color_inactive));
+            dots[i].setTextColor(getResources().getColor(R.color.colorLightGrey));
             dotsLayout.addView(dots[i]);
         }
 
         if (dots.length > 0)
-            dots[currentPage].setTextColor(getResources().getColor(R.color.dot_color_active));
+            dots[currentPage].setTextColor(getResources().getColor(R.color.colorMarron));
     }
 
     private int getItem(int i) {

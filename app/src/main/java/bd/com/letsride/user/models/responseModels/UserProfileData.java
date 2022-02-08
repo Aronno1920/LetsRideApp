@@ -31,7 +31,7 @@ public class UserProfileData {
     private Boolean isProfileUpdated;
     @SerializedName("referralCode")
     @Expose
-    private Object referralCode;
+    private String referralCode;
 
     public String getUserId() {
         return userId;
@@ -97,11 +97,11 @@ public class UserProfileData {
         this.isProfileUpdated = isProfileUpdated;
     }
 
-    public Object getReferralCode() {
+    public String getReferralCode() {
         return referralCode;
     }
 
-    public void setReferralCode(Object referralCode) {
+    public void setReferralCode(String referralCode) {
         this.referralCode = referralCode;
     }
 

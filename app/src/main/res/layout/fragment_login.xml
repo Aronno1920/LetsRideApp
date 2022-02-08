@@ -43,5 +43,5 @@
         android:background="@drawable/style_buttom"
         android:layout_marginTop="10dp"
         android:text="Login"
-        android:textColor="@color/colorTextWhite" />
+        android:textColor="@color/colorWhite" />
 </LinearLayout>

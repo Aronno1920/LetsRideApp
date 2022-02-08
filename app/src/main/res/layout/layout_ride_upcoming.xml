@@ -23,7 +23,7 @@
                 android:id="@+id/TextView_ZoneName"
                 android:text="Ride Zone Name"
                 android:textSize="16dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimaryMarron"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

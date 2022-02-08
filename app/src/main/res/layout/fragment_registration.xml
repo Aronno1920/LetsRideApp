@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryMarron"
         android:text="Registration Information"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -62,6 +62,6 @@
         android:layout_marginTop="10dp"
         android:textAllCaps="false"
         android:text="Update Profile"
-        android:textColor="@color/colorTextWhite" />
+        android:textColor="@color/colorWhite" />
 
 </LinearLayout>

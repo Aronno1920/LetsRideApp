@@ -43,7 +43,7 @@
         android:background="@drawable/style_buttom"
         android:layout_marginTop="10dp"
         android:text="@string/level_verify_button"
-        android:textColor="@color/colorTextWhite" />
+        android:textColor="@color/colorWhite" />
 
     <TextView
         android:id="@+id/TextView_Countdown_timer"

@@ -17,11 +17,13 @@ import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
 import bd.com.letsride.user.models.requestModels.VerifyOTPRequest;
 import bd.com.letsride.user.models.responseModels.SendOTPData;
+import bd.com.letsride.user.models.responseModels.SendOTPResponse;
 import bd.com.letsride.user.models.responseModels.VerifyOTPData;
 import bd.com.letsride.user.models.responseModels.VerifyOTPResponse;
 import bd.com.letsride.user.presentation.activities.HomeActivity;
 import bd.com.letsride.user.presentation.activities.RegistrationActivity;
 import bd.com.letsride.user.utilities.BaseFragment;
+import bd.com.letsride.user.utilities.ProgressDialogHelper;
 import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.SessionManager;
 import bd.com.letsride.user.utilities.UtilityClass;
@@ -50,18 +52,18 @@ public class VerificationFragment extends BaseFragment {
         session = new SessionManager(getActivity().getApplicationContext());
 
         InitializationViews();
-
         StartTimer();
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (etVerificationNumber.getText().length() == 6) {
 
-                //if (etVerificationNumber.getText().length() != 6) {
-                requestVerificatinSuccess();
-                //} else {
-                //    Toast.makeText(getActivity().getApplicationContext(), "Verifaiction number must be 6 digit", Toast.LENGTH_LONG).show();
-                // }
+                    ProgressDialogHelper.ShowDialog(getActivity(), "", "Verify OTP code...");
+                    requestVerificatinSuccess();
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Verifaiction number must be 6 digit", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -79,20 +81,19 @@ public class VerificationFragment extends BaseFragment {
     }
 
     private void requestVerificatinSuccess() {
-        try {
-            if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
+        if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
-                SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
-                VerifyOTPRequest otpRequest = new VerifyOTPRequest("Mobile", "Authentication", sendOTPData.getCountryCode(), sendOTPData.getMobileNumber(), sendOTPData.getPrefix(), etVerificationNumber.getText().toString());
+            SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+            VerifyOTPRequest otpRequest = new VerifyOTPRequest("Mobile", "Authentication", sendOTPData.getCountryCode(), sendOTPData.getMobileNumber(), sendOTPData.getPrefix(), etVerificationNumber.getText().toString());
 
-                ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-                Call<VerifyOTPResponse> call = apiService.verifyOTPSuccess(otpRequest);
-                call.enqueue(new Callback<VerifyOTPResponse>() {
-                    @Override
-                    public void onResponse(Call<VerifyOTPResponse> call, retrofit2.Response<VerifyOTPResponse> response) {
+            ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
+            Call<VerifyOTPResponse> call = apiService.verifyOTPSuccess(otpRequest);
+            call.enqueue(new Callback<VerifyOTPResponse>() {
+                @Override
+                public void onResponse(Call<VerifyOTPResponse> call, retrofit2.Response<VerifyOTPResponse> response) {
+                    try {
                         if (response.body().getSucceeded()) {
 
-                            //Store API Response to Temporary memory
                             VerifyOTPData myVerify = response.body().getVerifyOTPData();
                             new ResponseModelDAO().addVerifyOTPResponseToDAO(myVerify);
 
@@ -101,17 +102,19 @@ public class VerificationFragment extends BaseFragment {
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        ProgressDialogHelper.DismissDialog();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<VerifyOTPResponse> call, Throwable t) {
-                        Log.d("A1920:Error", t.getMessage());
-                    }
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), "Hoynai", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Call<VerifyOTPResponse> call, Throwable t) {
+                    Log.d("A1920:Error", t.getMessage());
+                    ProgressDialogHelper.DismissDialog();
+                }
+            });
         }
     }
 

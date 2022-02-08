@@ -36,17 +36,17 @@ public class SplashActivity extends BaseActivity {
                     e.printStackTrace();
                 } finally {
 
-//                    if(session.IsSetLanguage()==false){
-//                        Intent login = new Intent(SplashActivity.this, LanguageActivity.class);
-//                        startActivity(login);
-//                    }
-//                    else if (CheckUserLoginStatus()) {
-//                        Intent login = new Intent(SplashActivity.this, HomeActivity.class);
-//                        startActivity(login);
-//                    } else {
+                    if(session.IsSetLanguage()==false){
+                        Intent login = new Intent(SplashActivity.this, LanguageActivity.class);
+                        startActivity(login);
+                    }
+                    else if (CheckUserLoginStatus()) {
+                        Intent login = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(login);
+                    } else {
                     Intent login = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(login);
-//                    }
+                   }
                 }
             }
         };
@@ -60,7 +60,6 @@ public class SplashActivity extends BaseActivity {
     }
 
     private boolean CheckUserLoginStatus() {
-        //return session.isLoggedIn();
-        return false;
+        return session.IsLoggedIn();
     }
 }

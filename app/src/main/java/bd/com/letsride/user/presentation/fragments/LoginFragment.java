@@ -49,11 +49,10 @@ public class LoginFragment extends BaseFragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (txtMobileNumber.getText().length() >= 10) {
                     if (txtMobileNumber.getText().toString().matches("^(?:\\+88|88)?(01[3-9]\\d{8})$")) {
 
-                        ProgressDialogHelper.ShowDialog(getActivity(), "text", "Sending OTP..,");
+                        ProgressDialogHelper.ShowDialog(getActivity(), "", "Sending verification code...");
                         requestVerificationCode();
                     } else {
                         Toast.makeText(getActivity().getApplicationContext(), "Mobile Number is not valid", Toast.LENGTH_LONG).show();
@@ -86,7 +85,7 @@ public class LoginFragment extends BaseFragment {
                 public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
                     try {
                         if (response.body().getSucceeded()) {
-                            responseHandling(response.body());
+                            ResponseHandling(response.body());
                             redirectToVerifyPage();
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -107,11 +106,10 @@ public class LoginFragment extends BaseFragment {
         }
     }
 
-    private void responseHandling(SendOTPResponse response) {
+    private void ResponseHandling(SendOTPResponse response) {
         SendOTPData myOTP = response.getSendOTPData();
-        myOTP.setCountryCode(myOTP.getCountryCode());
-        myOTP.setMobileNumber(myOTP.getMobileNumber());
+        myOTP.setCountryCode("+88");
+        myOTP.setMobileNumber(txtMobileNumber.getText().toString());
         new ResponseModelDAO().addSendOTPResponseToDAO(myOTP);
-
     }
 }

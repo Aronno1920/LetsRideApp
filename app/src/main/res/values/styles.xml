@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.Fab_LetsRide_bar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
-        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorPrimary">@color/colorPrimaryMarron</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryLightGrey</item>
+        <item name="colorOnPrimary">@color/colorPrimaryDarkGrey</item>
     </style>
 
     <style name="MyFloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
-        <item name="colorSecondary">@color/floting_background</item>
-        <item name="colorOnSecondary">@color/floting_icon</item>
+        <item name="colorSecondary">@color/colorLightGrey</item>
+        <item name="colorOnSecondary">@color/colorWhite</item>
+    </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorBlack</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="android:background">@color/colorLightGrey</item>
     </style>
 
 </resources>

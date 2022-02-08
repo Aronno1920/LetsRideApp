@@ -23,7 +23,7 @@
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/buttom_sheet_credit_purchase.xml" value="0.33" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_credit.xml" value="0.36666666666666664" />
-        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_dashboard.xml" value="0.33" />
+        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_login.xml" value="0.325" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_registration.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_routes.xml" value="0.36666666666666664" />
@@ -33,7 +33,7 @@
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_credit_purchase.xml" value="0.25" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_header.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_ride_details.xml" value="0.36666666666666664" />
-        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_ride_upcoming.xml" value="0.20416666666666666" />
+        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_ride_upcoming.xml" value="0.5" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_route.xml" value="0.33" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_setting_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/welcome_slide1.xml" value="0.33055555555555555" />
