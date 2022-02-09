@@ -90,17 +90,19 @@ public class DashboardFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LoadUpcomingRide(container);
         LoadUserProfile();
+        LoadUpcomingRide(container);
 
         StoreUserDataToSharedPref();
         tvGreeting.setText(setGreetingMessage());
     }
+
     private void StoreUserDataToSharedPref()
     {
         UserProfileData info = new ResponseModelDAO().getUserProfileResponse();
-        session.createLoginSession(info.getUserId(),info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
+        session.createLoginSession("1",info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
     }
+
     private String setGreetingMessage() {
         int timeNow = Calendar.getInstance().getTime().getHours();
         if ((timeNow <= 5) && (timeNow <= 12)) {

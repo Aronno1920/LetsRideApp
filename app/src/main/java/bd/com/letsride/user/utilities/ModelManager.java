@@ -39,11 +39,6 @@ public class ModelManager {
         else if (obj != null && obj instanceof UserProfileData) {
             modelContainer.setUserProfileResponse((UserProfileData) obj);
         }
-        else if (obj != null && obj instanceof VerifyOTPData) {
-            modelContainer.setVerifyOTPResponse((VerifyOTPData) obj);
-        }
-
-
         else {
             throw new JSONException("Object not found");
         }
@@ -55,6 +50,8 @@ public class ModelManager {
             return (T) modelContainer.getSendOTPResponse();
         } else if (className.equalsIgnoreCase("VerifyOTPData")) {
             return (T) modelContainer.getVerifyOTPResponse();
+        } else if (className.equalsIgnoreCase("UserProfileData")) {
+            return (T) modelContainer.getUserProfileResponse();
         }
         return null;
     }

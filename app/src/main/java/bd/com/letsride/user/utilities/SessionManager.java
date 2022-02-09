@@ -26,7 +26,6 @@ public class SessionManager {
     private static final String KEY_VERSION_NAME="en";
 
 
-//User Information as Session
     private static final String KEY_UserID = "user_id";
     private static final String KEY_CountryCode = "country_code";
     private static final String KEY_MobileNumber = "mobile_number";
@@ -34,7 +33,6 @@ public class SessionManager {
     private static final String KEY_LastName = "last_name";
     private static final String KEY_CurrentBalance = "current_balance";
     private static final String KEY_ReferCode = "refer_code";
-
 
 
     public SessionManager(Context context) {
