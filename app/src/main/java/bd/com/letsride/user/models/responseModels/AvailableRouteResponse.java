@@ -2,13 +2,14 @@ package bd.com.letsride.user.models.responseModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class GetBalanceResponse {
+public class AvailableRouteResponse {
 
     @SerializedName("data")
     @Expose
-    private GetBalanceData data;
+    private List<AvailableRouteData> data = null;
     @SerializedName("errors")
     @Expose
     private List<ErrorData> errors = null;
@@ -25,7 +26,7 @@ public class GetBalanceResponse {
     @Expose
     private Boolean succeeded;
 
-    public GetBalanceData getData() {
+    public List<AvailableRouteData> getAvailableRoutesData() {
         return data;
     }
 

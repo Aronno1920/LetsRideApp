@@ -2,6 +2,7 @@ package bd.com.letsride.user.utilities;
 
 import org.json.JSONException;
 
+import bd.com.letsride.user.models.responseModels.BalanceData;
 import bd.com.letsride.user.models.responseModels.DepositConfigData;
 import bd.com.letsride.user.models.responseModels.SendOTPData;
 import bd.com.letsride.user.models.responseModels.UserProfileData;
@@ -34,6 +35,7 @@ public class ResponseModelDAO {
         return (VerifyOTPData) modelManager.getObject("VerifyOTPData");
     }
 
+
     public void addUserProfileResponseToDAO(UserProfileData userProfileData) {
         try {
             modelManager.addToJson(userProfileData);
@@ -45,6 +47,17 @@ public class ResponseModelDAO {
         return (UserProfileData) modelManager.getObject("UserProfileData");
     }
 
+
+    public void addBalanceResponseToDAO(BalanceData balanceData) {
+        try {
+            modelManager.addToJson(balanceData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public BalanceData getBalanceResponse() {
+        return (BalanceData) modelManager.getObject("BalanceData");
+    }
 
 
     public void addDepositConfigResponseToDAO(DepositConfigData depositConfigData) {

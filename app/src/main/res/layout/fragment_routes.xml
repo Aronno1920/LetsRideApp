@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".presentation.fragments.RoutesFragment">
 
     <TextView
@@ -23,6 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:background="@color/colorBackground"
         android:scrollbarThumbVertical="@android:color/transparent"
         android:scrollbarThumbHorizontal="@android:color/transparent">
 
@@ -40,7 +42,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp" />
+                android:layout_height="60dp"
+                android:background="@color/colorBackground"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

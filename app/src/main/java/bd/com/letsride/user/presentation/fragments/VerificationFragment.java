@@ -15,6 +15,7 @@ import android.widget.Toast;
 import bd.com.letsride.user.R;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
+import bd.com.letsride.user.models.requestModels.SendOTPRequest;
 import bd.com.letsride.user.models.requestModels.VerifyOTPRequest;
 import bd.com.letsride.user.models.responseModels.SendOTPData;
 import bd.com.letsride.user.models.responseModels.SendOTPResponse;
@@ -67,6 +68,16 @@ public class VerificationFragment extends BaseFragment {
             }
         });
 
+        tvTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tvTimer.getText().toString().contains("Send again"))
+                {
+                    requestVerificationCode();
+                }
+            }
+        });
+
         return view;
     }
 
@@ -87,7 +98,7 @@ public class VerificationFragment extends BaseFragment {
             VerifyOTPRequest otpRequest = new VerifyOTPRequest("Mobile", "Authentication", sendOTPData.getCountryCode(), sendOTPData.getMobileNumber(), sendOTPData.getPrefix(), etVerificationNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<VerifyOTPResponse> call = apiService.verifyOTPSuccess(otpRequest);
+            Call<VerifyOTPResponse> call = apiService.requestVerifyOTP(otpRequest);
             call.enqueue(new Callback<VerifyOTPResponse>() {
                 @Override
                 public void onResponse(Call<VerifyOTPResponse> call, retrofit2.Response<VerifyOTPResponse> response) {
@@ -118,8 +129,44 @@ public class VerificationFragment extends BaseFragment {
         }
     }
 
+    private void requestVerificationCode() {
+        if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
+
+            ProgressDialogHelper.ShowDialog(getActivity(), "", "Sending verification code again...");
+            SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+            SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Authentication", sendOTPData.getCountryCode(), sendOTPData.getMobileNumber());
+
+            ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
+            Call<SendOTPResponse> call = apiService.requestSendOTPCode(otpRequest);
+            call.enqueue(new Callback<SendOTPResponse>() {
+                @Override
+                public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
+                    try {
+                        if (response.body().getSucceeded()) {
+                            SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+                            tvPrefix.setText(sendOTPData.getPrefix() + " - ");
+                            StartTimer();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        ProgressDialogHelper.DismissDialog();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SendOTPResponse> call, Throwable t) {
+                    Log.d("A1920:Error", t.getMessage());
+                    ProgressDialogHelper.DismissDialog();
+                }
+            });
+        }
+    }
+
     private void StartTimer() {
-        new CountDownTimer(120000, 1000) {
+        new CountDownTimer(20000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvTimer.setText("Seconds remaining: " + millisUntilFinished / 1000 + "s");
             }

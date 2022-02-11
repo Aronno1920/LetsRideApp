@@ -3,6 +3,7 @@
     <color name="colorPrimaryMarron">#CC0001</color>
     <color name="colorPrimaryLightGrey">#BFBFBF</color>
     <color name="colorPrimaryDarkGrey">#4D4D4D</color>
+    <color name="colorBackground">#f6f6f6</color>
 
     <color name="colorMarron">#CC0001</color>
     <color name="colorWhite">#FFFFFFFF</color>

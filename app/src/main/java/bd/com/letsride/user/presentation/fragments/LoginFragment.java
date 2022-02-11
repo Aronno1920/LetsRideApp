@@ -2,7 +2,6 @@ package bd.com.letsride.user.presentation.fragments;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import bd.com.letsride.user.utilities.ResponseModelDAO;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginFragment extends BaseFragment {
 
@@ -79,7 +77,7 @@ public class LoginFragment extends BaseFragment {
             SendOTPRequest otpRequest = new SendOTPRequest("Mobile", "Authentication", "+88", txtMobileNumber.getText().toString());
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<SendOTPResponse> call = apiService.requestVerificationCode(otpRequest);
+            Call<SendOTPResponse> call = apiService.requestSendOTPCode(otpRequest);
             call.enqueue(new Callback<SendOTPResponse>() {
                 @Override
                 public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {

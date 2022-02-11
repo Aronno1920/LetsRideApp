@@ -3,7 +3,7 @@ package bd.com.letsride.user.models.responseModels;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetBalanceData {
+public class BalanceData {
 
     @SerializedName("type")
     @Expose

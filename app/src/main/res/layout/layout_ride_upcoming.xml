@@ -55,7 +55,7 @@
                 <TextView
                     android:id="@+id/TextView_RidePrice"
                     android:text="150"
-                    android:layout_marginLeft="160dp"
+                    android:layout_marginLeft="100dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>

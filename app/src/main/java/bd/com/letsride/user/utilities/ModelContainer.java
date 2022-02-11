@@ -2,6 +2,7 @@ package bd.com.letsride.user.utilities;
 
 import com.google.gson.GsonBuilder;
 
+import bd.com.letsride.user.models.responseModels.BalanceData;
 import bd.com.letsride.user.models.responseModels.DepositConfigData;
 import bd.com.letsride.user.models.responseModels.SendOTPData;
 import bd.com.letsride.user.models.responseModels.UserProfileData;
@@ -11,6 +12,7 @@ public class ModelContainer {
     SendOTPData sendOTPData;
     VerifyOTPData verifyOTPData;
     UserProfileData userProfileData;
+    BalanceData balanceData;
     DepositConfigData depositConfigData;
 
 
@@ -35,6 +37,14 @@ public class ModelContainer {
     }
     public void setUserProfileResponse(UserProfileData userProfileData) {
         this.userProfileData = userProfileData;
+    }
+
+
+    public BalanceData getBalanceResponse() {
+        return balanceData;
+    }
+    public void setBalanceResponse(BalanceData balanceData) {
+        this.balanceData = balanceData;
     }
 
 

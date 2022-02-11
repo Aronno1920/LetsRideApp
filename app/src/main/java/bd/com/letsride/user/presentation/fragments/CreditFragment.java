@@ -19,6 +19,7 @@ import bd.com.letsride.user.models.responseModels.DepositConfigData;
 import bd.com.letsride.user.models.responseModels.DepositConfigResponse;
 import bd.com.letsride.user.utilities.AutoFitGridLayoutManager;
 import bd.com.letsride.user.utilities.BaseFragment;
+import bd.com.letsride.user.utilities.SessionManager;
 import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +29,7 @@ public class CreditFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private List<DepositConfigData> depositList;
     private CreditPurchaseAdapter creditAdapter;
+    SessionManager session;
 
     public CreditFragment() {
     }
@@ -43,8 +45,8 @@ public class CreditFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_credit, container, false);
+        session = new SessionManager(getActivity().getApplicationContext());
         this.container = container;
-
 
         requestAllDepositConfig();
 
@@ -64,7 +66,7 @@ public class CreditFragment extends BaseFragment {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<DepositConfigResponse> call = apiService.requestAllDepositConfig();
+            Call<DepositConfigResponse> call = apiService.requestAllDepositConfig("Bearer" + " " + session.fetchAuthToken());
             call.enqueue(new Callback<DepositConfigResponse>() {
                 @Override
                 public void onResponse(Call<DepositConfigResponse> call, retrofit2.Response<DepositConfigResponse> response) {

@@ -3,6 +3,8 @@ package bd.com.letsride.user.apiClasses;
 import bd.com.letsride.user.models.requestModels.SaveUserRequest;
 import bd.com.letsride.user.models.requestModels.SendOTPRequest;
 import bd.com.letsride.user.models.requestModels.VerifyOTPRequest;
+import bd.com.letsride.user.models.responseModels.AvailableRouteResponse;
+import bd.com.letsride.user.models.responseModels.BalanceResponse;
 import bd.com.letsride.user.models.responseModels.DepositConfigResponse;
 import bd.com.letsride.user.models.responseModels.SaveUserPesponse;
 import bd.com.letsride.user.models.responseModels.SendOTPResponse;
@@ -18,25 +20,41 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     @POST("Auth/SendOTP")
-    Call<SendOTPResponse> requestVerificationCode(@Body SendOTPRequest model);
+    Call<SendOTPResponse> requestSendOTPCode(@Body SendOTPRequest model);
 
     @POST("Auth/VerifyOTP")
-    Call<VerifyOTPResponse> verifyOTPSuccess(@Body VerifyOTPRequest model);
+    Call<VerifyOTPResponse> requestVerifyOTP(@Body VerifyOTPRequest model);
+
+
 
     @POST("Auth/SaveUser")
-    Call<SaveUserPesponse> requestUserProfileSave(@Body SaveUserRequest model);
-
+    Call<SaveUserPesponse> requestSaveUserProfile(@Body SaveUserRequest model);
 
     @GET("Auth/GetUserByName")
-    Call<UserProfileResponse> requestUserProfile(
+    Call<UserProfileResponse> requestGetUserByName(
+            @Header("Authorization") String token,
+            @Query("ownerType") String ownerType,
+            @Query("userName") String userName
+    );
+
+    @GET("Wallet/GetBalance")
+    Call<BalanceResponse> requestGetBalance(
             @Header("Authorization") String token,
             @Query("ownerType") String ownerType,
             @Query("userName") String userName
     );
 
 
+
+    @GET("Route/GetAvailableRoutes")
+    Call<AvailableRouteResponse> requestAllAvailableRoutes(
+            @Header("Authorization") String token
+    );
+
+
+
     @GET("Wallet/GetDepositConfig")
-    Call<DepositConfigResponse> requestAllDepositConfig();
-
-
+    Call<DepositConfigResponse> requestAllDepositConfig(
+            @Header("Authorization") String token
+    );
 }

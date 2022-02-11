@@ -69,7 +69,7 @@ public class RegistrationFragment extends BaseFragment {
             SaveUserRequest saveRequest = new SaveUserRequest(txtFirstName.getText().toString(),txtLastName.getText().toString(),txtEmail.getText().toString(),sendOTPData.getMobileNumber(),txtPassword.getText().toString(),"ProfilePhoto");
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<SaveUserPesponse> call = apiService.requestUserProfileSave(saveRequest);
+            Call<SaveUserPesponse> call = apiService.requestSaveUserProfile(saveRequest);
             call.enqueue(new Callback<SaveUserPesponse>() {
                 @Override
                 public void onResponse(Call<SaveUserPesponse> call, retrofit2.Response<SaveUserPesponse> response) {

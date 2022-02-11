@@ -37,72 +37,35 @@ public class UserProfileData {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getProfilePhoto() {
         return profilePhoto;
     }
 
-    public void setProfilePhoto(String profilePhoto) {
-        this.profilePhoto = profilePhoto;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getCountryCode() {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public Boolean getIsProfileUpdated() {
+    public Boolean getProfileUpdated() {
         return isProfileUpdated;
-    }
-
-    public void setIsProfileUpdated(Boolean isProfileUpdated) {
-        this.isProfileUpdated = isProfileUpdated;
     }
 
     public String getReferralCode() {
         return referralCode;
     }
-
-    public void setReferralCode(String referralCode) {
-        this.referralCode = referralCode;
-    }
-
 }

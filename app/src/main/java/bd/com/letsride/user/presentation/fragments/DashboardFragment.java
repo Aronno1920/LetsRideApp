@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.load.model.ImageVideoWrapper;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -27,6 +25,8 @@ import bd.com.letsride.user.adapters.RideUpcomingAdapter;
 import bd.com.letsride.user.apiClasses.ApiClient;
 import bd.com.letsride.user.apiClasses.ApiInterface;
 import bd.com.letsride.user.models.RideUpcomingModel;
+import bd.com.letsride.user.models.responseModels.BalanceData;
+import bd.com.letsride.user.models.responseModels.BalanceResponse;
 import bd.com.letsride.user.models.responseModels.SendOTPData;
 import bd.com.letsride.user.models.responseModels.UserProfileData;
 import bd.com.letsride.user.models.responseModels.UserProfileResponse;
@@ -38,10 +38,12 @@ import bd.com.letsride.user.utilities.UtilityClass;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+
 public class DashboardFragment extends BaseFragment {
 
     View view;
-    TextView tvUserName, tvReferCode, tvGreeting;
+    ViewGroup container;
+    TextView tvUserName, tvReferCode, tvGreeting, tvBalance, tvExpireDate;
     Button btnShareCode;
     private RecyclerView recyclerView;
     private List<RideUpcomingModel> rideDetailsList;
@@ -49,15 +51,12 @@ public class DashboardFragment extends BaseFragment {
     SessionManager session;
 
     public DashboardFragment() {
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    ViewGroup container;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +66,9 @@ public class DashboardFragment extends BaseFragment {
 
         tvGreeting = view.findViewById(R.id.TextView_Greeting);
         tvUserName = view.findViewById(R.id.TextView_UserName);
-        tvReferCode = view.findViewById(R.id.TextVew_ReferalCode);
+        tvReferCode = view.findViewById(R.id.TextView_ReferralCode);
+        tvBalance = view.findViewById(R.id.TextView_Current_Balance);
+        tvExpireDate = view.findViewById(R.id.TextView_Expired_Date);
         btnShareCode = view.findViewById(R.id.Button_Share_Refer_Code);
 
         btnShareCode.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +76,7 @@ public class DashboardFragment extends BaseFragment {
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Get 100% off on your first move at Let's Ride. To accept, register and use the refer code: "+tvReferCode.getText()+"\n\nDownload now: https://developer.android.com/training/sharing/");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Get 100% off on your first move at Let's Ride. To accept, register and use the refer code: " + tvReferCode.getText() + "\n\nDownload now: https://developer.android.com/training/sharing/");
                 sendIntent.setType("text/plain");
 
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
@@ -90,17 +91,20 @@ public class DashboardFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        tvGreeting.setText(setGreetingMessage());
+
         LoadUserProfile();
+        LoadUserBalance();
         LoadUpcomingRide(container);
 
         StoreUserDataToSharedPref();
-        tvGreeting.setText(setGreetingMessage());
     }
 
     private void StoreUserDataToSharedPref()
     {
         UserProfileData info = new ResponseModelDAO().getUserProfileResponse();
-        session.createLoginSession("1",info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
+        session.createLoginSession("1","","","","","","","","");
+        //session.createLoginSession("1",info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
     }
 
     private String setGreetingMessage() {
@@ -123,7 +127,7 @@ public class DashboardFragment extends BaseFragment {
             ProgressDialogHelper.ShowDialog(getActivity(), "", "Profile loading...");
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<UserProfileResponse> call = apiService.requestUserProfile("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
+            Call<UserProfileResponse> call = apiService.requestGetUserByName("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
             call.enqueue(new Callback<UserProfileResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<UserProfileResponse> call, @NonNull retrofit2.Response<UserProfileResponse> response) {
@@ -158,6 +162,47 @@ public class DashboardFragment extends BaseFragment {
         }
     }
 
+    private void LoadUserBalance() {
+        if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
+
+            SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+
+            ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
+            Call<BalanceResponse> call = apiService.requestGetBalance("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
+            call.enqueue(new Callback<BalanceResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<BalanceResponse> call, @NonNull retrofit2.Response<BalanceResponse> response) {
+                    try {
+                        if (response.body() != null) {
+                            if (response.body().getSucceeded()) {
+
+                                BalanceData balance = response.body().getBalanceData();
+                                tvBalance.setText(balance.getCurrency() + " " + balance.getCurrentBalance());
+                                tvExpireDate.setText("Expired on " + balance.getBalanceExpiryDate());
+
+                                new ResponseModelDAO().addBalanceResponseToDAO(balance);
+                            } else {
+                                Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Response not found", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        ProgressDialogHelper.DismissDialog();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<BalanceResponse> call, Throwable t) {
+                    Log.d("A1920:Error", t.getMessage());
+                    ProgressDialogHelper.DismissDialog();
+                }
+            });
+        }
+    }
+
     private void LoadUpcomingRide(ViewGroup container) {
         rideDetailsList = GetAllRideDetails();
         recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerView_Ride_Upcoming);
@@ -171,20 +216,20 @@ public class DashboardFragment extends BaseFragment {
 
     public List<RideUpcomingModel> GetAllRideDetails() {
         List<RideUpcomingModel> rModel = new ArrayList<RideUpcomingModel>();
-        rModel.add(new RideUpcomingModel("Mirpur 1 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 2 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 3 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 4 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 5 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 6 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 7 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 8 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 9 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 10 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 11 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 12 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 13 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
-        rModel.add(new RideUpcomingModel("Mirpur 14 >> Gulshan", "19 January, 2022", "6:08 AM", "120 BDT.", "Niyaj Ahmed Firoz"));
+        rModel.add(new RideUpcomingModel("Mirpur 12 Bus Stand >> Gulshan Police Plaza", "19 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "20 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Mirpur 12 Bus Stand >> Gulshan Police Plaza", "21 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "22 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Mirpur 12 Bus Stand >> Gulshan Police Plaza", "23 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "24 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Mirpur 12 Bus Stand >> Gulshan Police Plaza", "25 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "26 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Mirpur 12 Bus Stand >> Gulshan Police Plaza", "27 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "28 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Mirpur 12 Bus Stand >> Gulshan Police Plaza", "29 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "30 January, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("MMirpur 12 Bus Stand >> Gulshan Police Plaza", "01 February, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
+        rModel.add(new RideUpcomingModel("Gulshan Police Plaza >> Mirpur 12 Bus Stand", "02 February, 2022", "6:08 AM", "120 BDT.", "Habibur Miya"));
 
         return rModel;
     }

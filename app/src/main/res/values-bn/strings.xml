@@ -25,7 +25,7 @@
     <string name="level_SignUp">সাইন আপ</string>
     <string name="level_Forget">ভুলে গেছেন?</string>
     <string name="level_Password">পাসওয়ার্ড</string>
-    <string name="level_Contineu_With">অথবা চালিয়ে যান</string>
+    <string name="level_Continue_With">অথবা চালিয়ে যান</string>
 
     <!-- TODO: Registration Screen -->
     <string name="level_first_name">নামের প্রথম অংশ</string>

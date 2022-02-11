@@ -13,25 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bd.com.letsride.user.R;
-import bd.com.letsride.user.models.RouteModel;
+import bd.com.letsride.user.models.responseModels.AvailableRouteData;
 
 public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<RouteModel> routeList = new ArrayList<RouteModel>();
+    private List<AvailableRouteData> routeList = new ArrayList<AvailableRouteData>();
 
-    public AvailableRouteAdapter(Context mContext, List<RouteModel> allCreditList) {
+    public AvailableRouteAdapter(Context mContext, List<AvailableRouteData> allCreditList) {
         this.mContext = mContext;
         this.routeList = allCreditList;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtPickup, txtDropOff, txtViaZone, txtDescription;
+        public TextView txtPickupLocation, txtDropOffLocation, txtPickupZone, txtDropOffZone, txtZoneCode, txtViaZone, txtDescription;
 
         public MyViewHolder(View view) {
             super(view);
-            txtPickup = (TextView) view.findViewById(R.id.TextView_Pickup_Zone);
-            txtDropOff = (TextView) view.findViewById(R.id.TextView_DropOff_Zone);
+            txtPickupLocation = (TextView) view.findViewById(R.id.TextView_PickupLocation);
+            txtDropOffLocation = (TextView) view.findViewById(R.id.TextView_DropOffLocation);
+
+            txtPickupZone = (TextView) view.findViewById(R.id.TextView_PickupZone);
+            txtDropOffZone = (TextView) view.findViewById(R.id.TextView_DropOffZone);
+            txtZoneCode = (TextView) view.findViewById(R.id.TextView_ZoneCode);
+
             txtViaZone = (TextView) view.findViewById(R.id.TextView_Via_Zone);
             txtDescription = (TextView) view.findViewById(R.id.TextView_Zone_Description);
         }
@@ -49,17 +54,20 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
         Typeface font_italic = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara_italic.ttf");
         Typeface font_bold = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara_bold.ttf");
 
-        RouteModel aRoute = routeList.get(position);
+        AvailableRouteData aRoute = routeList.get(position);
 
-        holder.txtPickup.setText(aRoute.getPickZoneName());
-        holder.txtDropOff.setText(aRoute.getDropZoneName());
-        if (aRoute.getViaZoneName() != null && !aRoute.getViaZoneName().trim().isEmpty()) {
-            holder.txtViaZone.setText(aRoute.getViaZoneName());
-        }
-        holder.txtDescription.setText(aRoute.getZoneDescription());
+        holder.txtPickupLocation.setText(aRoute.getPickupLocation());
+        holder.txtDropOffLocation.setText(aRoute.getDropOffLocation());
+        holder.txtPickupZone.setText(aRoute.getPickupLocation());
+        holder.txtDropOffZone.setText(aRoute.getDropOffLocation());
+        holder.txtZoneCode.setText(aRoute.getPickupLocation());
+        holder.txtViaZone.setText(aRoute.getPickupLocation());
 
-        holder.txtPickup.setTypeface(font_bold);
-        holder.txtDropOff.setTypeface(font_bold);
+        holder.txtPickupLocation.setTypeface(font_bold);
+        holder.txtDropOffLocation.setTypeface(font_bold);
+        holder.txtPickupZone.setTypeface(font_bold);
+        holder.txtDropOffZone.setTypeface(font_bold);
+        holder.txtZoneCode.setTypeface(font_bold);
         holder.txtViaZone.setTypeface(font_normal);
         holder.txtDescription.setTypeface(font_italic);
     }

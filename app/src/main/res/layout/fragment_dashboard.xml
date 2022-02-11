@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorLightGrey"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context=".presentation.fragments.DashboardFragment">
 
@@ -14,10 +14,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/colorDarkGrey"
+            android:layout_height="200dp"
+            android:background="@drawable/background_profile"
             android:orientation="horizontal"
-            android:paddingTop="25dp"
             android:paddingBottom="15dp">
 
             <LinearLayout
@@ -43,7 +42,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:textColor="@color/colorWhite"
+                    android:text="ZxcXcXC"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -53,24 +53,24 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
                     android:textAlignment="center"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/TextView_Current_Balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Current Balance BDT. 200"
                     android:textAlignment="center"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/colorDarkGrey"
                     android:textSize="16dp" />
 
                 <TextView
+                    android:id="@+id/TextView_Expired_Date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Expired on Jan 12, 2022"
                     android:textAlignment="center"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorDarkGrey" />
             </LinearLayout>
         </LinearLayout>
 
@@ -79,9 +79,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,18 +103,78 @@
             android:background="@color/colorWhite"
             android:orientation="vertical"
             android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="Book Single"
+                android:text="Book Ride"
                 android:textColor="@color/colorDarkGrey"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginRight="3dp"
+                    android:background="@drawable/style_package_selector"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_daily">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Daily Package"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/style_package_selector"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_weekly">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weekly Package"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/style_package_selector"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_monthly">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monthly Package"/>
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -125,9 +183,7 @@
             android:background="@color/colorWhite"
             android:orientation="vertical"
             android:layout_marginTop="10dp"
-            android:paddingTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -183,7 +239,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -191,24 +249,22 @@
                         android:text="Share you code: " />
 
                     <TextView
-                        android:id="@+id/TextVew_ReferalCode"
+                        android:id="@+id/TextView_ReferralCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="SEL01985"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_arrow_forward" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="right">
                         <Button
                             android:id="@+id/Button_Share_Refer_Code"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
+                            android:textColor="@color/colorWhite"
                             android:text="Invite" />
                     </LinearLayout>
 
@@ -218,6 +274,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp" />
+            android:layout_height="90dp"
+            android:background="@color/colorWhite"/>
     </LinearLayout>
 </ScrollView>
