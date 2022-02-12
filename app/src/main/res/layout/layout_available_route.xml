@@ -10,6 +10,8 @@
     card_view:cardPreventCornerOverlap="false"
     card_view:cardUseCompatPadding="true"
     android:elevation="3dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     card_view:cardCornerRadius="@dimen/card_ride_upcoming_round">
 
     <LinearLayout
@@ -29,12 +31,14 @@
                 android:text="Mirpur 1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
-            <TextView
-                android:text=" >>> "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_moving_car"></ImageView>
 
             <TextView
                 android:id="@+id/TextView_DropOffLocation"
@@ -42,7 +46,21 @@
                 android:text="Police Plaza"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="8dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/TextView_Via_Zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Via ECB" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -71,29 +89,14 @@
                 android:text="Via ECB" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingBottom="8dp"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/TextView_Via_Zone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Via ECB" />
-
-        </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/TextView_Zone_Description"
+            android:id="@+id/TextView_Distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mirpur 2, Mirpur 10, Mirpur 11, Mirpur 12, Kalshi, ECB, Banani, Gulshan 2, Gulshan 1"
             android:textSize="12dp"/>
     </LinearLayout>
 

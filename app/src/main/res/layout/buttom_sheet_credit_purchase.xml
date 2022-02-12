@@ -97,14 +97,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorMarron"
         android:text="PROCEED PAYMENT" />
 
     <Button
         android:id="@+id/course_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorLightGrey"
+        android:textColor="@color/colorDarkGrey"
         android:text="PAY LATER" />
 
 </LinearLayout>

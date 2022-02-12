@@ -96,20 +96,17 @@ public class DashboardFragment extends BaseFragment {
         LoadUserProfile();
         LoadUserBalance();
         LoadUpcomingRide(container);
-
-        StoreUserDataToSharedPref();
     }
 
     private void StoreUserDataToSharedPref()
     {
         UserProfileData info = new ResponseModelDAO().getUserProfileResponse();
-        session.createLoginSession("1","","","","","","","","");
-        //session.createLoginSession("1",info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
+        session.createLoginSession("1",info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
     }
 
     private String setGreetingMessage() {
         int timeNow = Calendar.getInstance().getTime().getHours();
-        if ((timeNow <= 5) && (timeNow <= 12)) {
+        if ((timeNow >= 5) && (timeNow <= 12)) {
             return "Good Morning";
         } else if ((timeNow > 12) && (timeNow <= 16)) {
             return "Good Afternoon";
@@ -134,12 +131,12 @@ public class DashboardFragment extends BaseFragment {
                     try {
                         if (response.body() != null) {
                             if (response.body().getSucceeded()) {
-
                                 UserProfileData info = response.body().getUserProfileData();
+                                new ResponseModelDAO().addUserProfileResponseToDAO(info);
+                                StoreUserDataToSharedPref();
+
                                 tvUserName.setText(info.getFirstName() + " " + info.getLastName());
                                 tvReferCode.setText(info.getReferralCode().toString());
-
-                                new ResponseModelDAO().addUserProfileResponseToDAO(info);
                             } else {
                                 Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }

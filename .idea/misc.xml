@@ -22,7 +22,7 @@
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/activity_registration.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
-        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/buttom_sheet_credit_purchase.xml" value="0.33" />
+        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/buttom_sheet_credit_purchase.xml" value="0.1" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_credit.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_login.xml" value="0.325" />
@@ -30,7 +30,7 @@
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_routes.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_setting.xml" value="0.33" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/fragment_verification.xml" value="0.3138888888888889" />
-        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_available_route.xml" value="0.36666666666666664" />
+        <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_available_route.xml" value="0.25" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_credit_purchase.xml" value="0.25" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_header.xml" value="0.36666666666666664" />
         <entry key="..\:/LetsRideProject/LetsRideUser/app/src/main/res/layout/layout_ride_details.xml" value="0.36666666666666664" />

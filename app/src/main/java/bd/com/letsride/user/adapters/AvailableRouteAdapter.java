@@ -1,5 +1,6 @@
 package bd.com.letsride.user.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtPickupLocation, txtDropOffLocation, txtPickupZone, txtDropOffZone, txtZoneCode, txtViaZone, txtDescription;
+        public TextView txtPickupLocation, txtDropOffLocation, txtPickupZone, txtDropOffZone, txtZoneCode, txtViaZone, txtDistance;
 
         public MyViewHolder(View view) {
             super(view);
@@ -38,7 +39,7 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
             txtZoneCode = (TextView) view.findViewById(R.id.TextView_ZoneCode);
 
             txtViaZone = (TextView) view.findViewById(R.id.TextView_Via_Zone);
-            txtDescription = (TextView) view.findViewById(R.id.TextView_Zone_Description);
+            txtDistance = (TextView) view.findViewById(R.id.TextView_Distance);
         }
     }
 
@@ -48,6 +49,7 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
         return new AvailableRouteAdapter.MyViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final AvailableRouteAdapter.MyViewHolder holder, int position) {
         Typeface font_normal = Typeface.createFromAsset(mContext.getAssets(), "fonts/candara.ttf");
@@ -58,10 +60,12 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
 
         holder.txtPickupLocation.setText(aRoute.getPickupLocation());
         holder.txtDropOffLocation.setText(aRoute.getDropOffLocation());
-        holder.txtPickupZone.setText(aRoute.getPickupLocation());
-        holder.txtDropOffZone.setText(aRoute.getDropOffLocation());
-        holder.txtZoneCode.setText(aRoute.getPickupLocation());
-        holder.txtViaZone.setText(aRoute.getPickupLocation());
+        holder.txtViaZone.setText(aRoute.getRoutePathName());
+
+        holder.txtPickupZone.setText(aRoute.getZoneFrom());
+        holder.txtDropOffZone.setText(aRoute.getZoneTo());
+        holder.txtZoneCode.setText(" ["+aRoute.getRoutePathCode()+"]");
+        holder.txtDistance.setText(aRoute.getRoutePathDistance()+" "+aRoute.getRoutePathDistanceMetric());
 
         holder.txtPickupLocation.setTypeface(font_bold);
         holder.txtDropOffLocation.setTypeface(font_bold);
@@ -69,7 +73,7 @@ public class AvailableRouteAdapter extends RecyclerView.Adapter<AvailableRouteAd
         holder.txtDropOffZone.setTypeface(font_bold);
         holder.txtZoneCode.setTypeface(font_bold);
         holder.txtViaZone.setTypeface(font_normal);
-        holder.txtDescription.setTypeface(font_italic);
+        holder.txtDistance.setTypeface(font_italic);
     }
 
     @Override

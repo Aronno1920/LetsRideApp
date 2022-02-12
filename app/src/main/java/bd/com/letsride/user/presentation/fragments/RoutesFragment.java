@@ -62,8 +62,6 @@ public class RoutesFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        LoadUpcomingRide(container);
     }
 
     private void LoadUpcomingRide(ViewGroup container) {
@@ -95,6 +93,7 @@ public class RoutesFragment extends BaseFragment {
 
                                 routeList = response.body().getAvailableRoutesData();
 
+                                LoadUpcomingRide(container);
                                 //new ResponseModelDAO().addBalanceResponseToDAO(balance);
                             } else {
                                 Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
