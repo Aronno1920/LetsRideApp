@@ -81,8 +81,7 @@ public class SettingFragment extends BaseFragment {
         if (context instanceof OnSettingsFragmentInteraction) {
             mListener = (OnSettingsFragmentInteraction) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnSettingsFragmentInteraction");
+            throw new RuntimeException(context.toString() + " must implement OnSettingsFragmentInteraction");
         }
     }
 

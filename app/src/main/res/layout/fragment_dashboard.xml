@@ -42,7 +42,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
-                    android:text="ZxcXcXC"
                     android:textColor="@color/colorDarkGrey"
                     android:textSize="16sp"
                     android:textStyle="bold" />
