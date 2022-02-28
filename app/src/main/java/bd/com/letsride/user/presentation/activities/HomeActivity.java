@@ -9,6 +9,8 @@ import android.os.Looper;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import bd.com.letsride.user.R;
@@ -30,44 +32,61 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initializeUI();
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
         registerActions();
 
         loadFragment(new DashboardFragment());
     }
 
-    private void registerActions() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        loadFragment(new DashboardFragment());
-                        break;
-                    case R.id.credit:
-                        loadFragment(new CreditFragment());
-                        break;
-                    case R.id.routes:
-                        loadFragment(new RoutesFragment());
-                        break;
-                    case R.id.settings:
-                        loadFragment(new SettingFragment());
-                        break;
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            loadFragment(new DashboardFragment());
+                            break;
+                        case R.id.credit:
+                            loadFragment(new CreditFragment());
+                            break;
+                        case R.id.routes:
+                            loadFragment(new RoutesFragment());
+                            break;
+                        case R.id.settings:
+                            loadFragment(new SettingFragment());
+                            break;
+                    }
+                    return false;
                 }
-                return true;
-            }
-        });
+            };
+
+    private void registerActions() {
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.home:
+//                        loadFragment(new DashboardFragment());
+//                        break;
+//                    case R.id.credit:
+//                        loadFragment(new CreditFragment());
+//                        break;
+//                    case R.id.routes:
+//                        loadFragment(new RoutesFragment());
+//                        break;
+//                    case R.id.settings:
+//                        loadFragment(new SettingFragment());
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
 
     }
 
     private void loadFragment(Fragment fragment) {
         getFragmentManager().beginTransaction().replace(R.id.linLayoutContainer, fragment).commit();
-    }
-
-    private void initializeUI() {
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setBackground(null);
-        bottomNavigationView.getMenu().getItem(2).setEnabled(false);
     }
 
     @Override
