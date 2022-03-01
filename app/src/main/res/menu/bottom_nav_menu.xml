@@ -12,7 +12,7 @@
         android:title="Credit" />
 
     <item
-        android:id="@+id/placeholder"
+        android:id="@+id/bookride"
         android:icon="@drawable/ic_car_booking"
         android:title="Book Now" />
 

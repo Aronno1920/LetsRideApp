@@ -133,7 +133,7 @@ public class DashboardFragment extends BaseFragment {
                             if (response.body().getSucceeded()) {
                                 UserProfileData info = response.body().getUserProfileData();
                                 new ResponseModelDAO().addUserProfileResponseToDAO(info);
-                                StoreUserDataToSharedPref();
+                                //StoreUserDataToSharedPref();
 
                                 tvUserName.setText(info.getFirstName() + " " + info.getLastName());
                                 tvReferCode.setText(info.getReferralCode().toString());

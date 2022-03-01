@@ -17,6 +17,7 @@ import bd.com.letsride.user.R;
 import bd.com.letsride.user.models.SettingMenuModel;
 import bd.com.letsride.user.presentation.fragments.CreditFragment;
 import bd.com.letsride.user.presentation.fragments.DashboardFragment;
+import bd.com.letsride.user.presentation.fragments.RouteSelectorFragment;
 import bd.com.letsride.user.presentation.fragments.RoutesFragment;
 import bd.com.letsride.user.presentation.fragments.SettingFragment;
 import bd.com.letsride.user.utilities.BaseActivity;
@@ -24,6 +25,7 @@ import bd.com.letsride.user.utilities.FragmentRouting;
 
 public class HomeActivity extends BaseActivity implements SettingFragment.OnSettingsFragmentInteraction, RoutesFragment.OnRouteFragmentInteraction {
 
+    int whereToGo;
     SettingMenuModel settingMenuModel;
     BottomNavigationView bottomNavigationView;
     boolean doubleBackToExitPressedOnce = false;
@@ -39,50 +41,52 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
         loadFragment(new DashboardFragment());
     }
 
-    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.home:
-                            loadFragment(new DashboardFragment());
-                            break;
-                        case R.id.credit:
-                            loadFragment(new CreditFragment());
-                            break;
-                        case R.id.routes:
-                            loadFragment(new RoutesFragment());
-                            break;
-                        case R.id.settings:
-                            loadFragment(new SettingFragment());
-                            break;
-                    }
-                    return false;
-                }
-            };
+//    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+//            new BottomNavigationView.OnNavigationItemSelectedListener() {
+//                @Override
+//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                    switch (item.getItemId()) {
+//                        case R.id.home:
+//                            loadFragment(new DashboardFragment());
+//                            break;
+//                        case R.id.credit:
+//                            loadFragment(new CreditFragment());
+//                            break;
+//                        case R.id.routes:
+//                            loadFragment(new RoutesFragment());
+//                            break;
+//                        case R.id.settings:
+//                            loadFragment(new SettingFragment());
+//                            break;
+//                    }
+//                    return false;
+//                }
+//            };
 
     private void registerActions() {
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.home:
-//                        loadFragment(new DashboardFragment());
-//                        break;
-//                    case R.id.credit:
-//                        loadFragment(new CreditFragment());
-//                        break;
-//                    case R.id.routes:
-//                        loadFragment(new RoutesFragment());
-//                        break;
-//                    case R.id.settings:
-//                        loadFragment(new SettingFragment());
-//                        break;
-//                }
-//                return true;
-//            }
-//        });
-
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        loadFragment(new DashboardFragment());
+                        break;
+                    case R.id.credit:
+                        loadFragment(new CreditFragment());
+                        break;
+                    case R.id.bookride:
+                        loadFragment(new RouteSelectorFragment());
+                        break;
+                    case R.id.routes:
+                        loadFragment(new RoutesFragment());
+                        break;
+                    case R.id.settings:
+                        loadFragment(new SettingFragment());
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void loadFragment(Fragment fragment) {
@@ -170,8 +174,6 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
         callIntent.setData(Uri.parse("tel:" + phone));
         startActivity(callIntent);
     }
-
-    int whereToGo;
 
     @Override
     public void onRouteButtonClicked(int whereToGo) {
