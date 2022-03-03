@@ -4,11 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-
 import java.util.HashMap;
 
+import bd.com.letsride.user.presentation.activities.HomeActivity;
 import bd.com.letsride.user.presentation.activities.LoginActivity;
-
 
 public class SessionManager {
     SharedPreferences pref;
@@ -16,23 +15,23 @@ public class SessionManager {
     Context _context;
     int PRIVATE_MODE = 0;
 
-    private static final String PREF_NAME = "LetsRide_Pref";
-    private static final String IS_SET_LANGUAGE = "false";
-    private static final String IS_LOGIN = "IsLoggedIn";
-    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
-    private static final String USER_TOKEN = "user_token";
-    private static final String KEY_DEFAULT_LANGUAGE="en";
-    private static final String KEY_VERSION_CODE="en";
-    private static final String KEY_VERSION_NAME="en";
+    public static final String PREF_NAME = "LetsRide_Pref";
+    public static final String IS_SET_LANGUAGE = "false";
+    public static final String IS_LOGIN = "IsLoggedIn";
+    public static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+    public static final String USER_TOKEN = "user_token";
+    public static final String KEY_DEFAULT_LANGUAGE="en";
+    public static final String KEY_VERSION_CODE="en";
+    public static final String KEY_VERSION_NAME="en";
 
 
-    private static final String KEY_UserID = "user_id";
-    private static final String KEY_CountryCode = "country_code";
-    private static final String KEY_MobileNumber = "mobile_number";
-    private static final String KEY_FirstName = "first_name";
-    private static final String KEY_LastName = "last_name";
-    private static final String KEY_CurrentBalance = "current_balance";
-    private static final String KEY_ReferCode = "refer_code";
+    public static final String KEY_UserID = "user_id";
+    public static final String KEY_CountryCode = "country_code";
+    public static final String KEY_MobileNumber = "mobile_number";
+    public static final String KEY_FirstName = "first_name";
+    public static final String KEY_LastName = "last_name";
+    public static final String KEY_CurrentBalance = "current_balance";
+    public static final String KEY_ReferCode = "refer_code";
 
 
     public SessionManager(Context context) {
@@ -41,11 +40,9 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String userID, String countryCode, String mobileNumber, String firstName, String lastName, String currentBalance, String referCode, String versionCode, String versionName) {
+    public void createLoginSession(String userID, String firstName, String lastName, String currentBalance, String referCode, String versionCode, String versionName) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_UserID, userID);
-        editor.putString(KEY_CountryCode, countryCode);
-        editor.putString(KEY_MobileNumber, mobileNumber);
         editor.putString(KEY_FirstName, firstName);
         editor.putString(KEY_LastName, lastName);
         editor.putString(KEY_CurrentBalance, currentBalance);
@@ -82,10 +79,6 @@ public class SessionManager {
     public void LogoutUser() {
         editor.clear();
         editor.commit();
-        Intent i = new Intent(_context, LoginActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        _context.startActivity(i);
     }
 
     public boolean IsLoggedIn() {
@@ -117,6 +110,12 @@ public class SessionManager {
 
     public void saveAuthToken(String token) {
         editor.putString(USER_TOKEN, token);
+        editor.commit();
+    }
+
+    public void saveMobileNumber(String countryCode,String mobileNumber) {
+        editor.putString(KEY_CountryCode, countryCode);
+        editor.putString(KEY_MobileNumber, mobileNumber);
         editor.commit();
     }
 

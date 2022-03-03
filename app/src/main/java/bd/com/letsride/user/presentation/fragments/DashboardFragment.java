@@ -101,7 +101,7 @@ public class DashboardFragment extends BaseFragment {
     private void StoreUserDataToSharedPref()
     {
         UserProfileData info = new ResponseModelDAO().getUserProfileResponse();
-        session.createLoginSession("1",info.getCountryCode(),info.getPhoneNumber(),info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
+        session.createLoginSession("1",info.getFirstName(),info.getLastName(),"0",info.getReferralCode(),"1920","00124");
     }
 
     private String setGreetingMessage() {
@@ -124,7 +124,7 @@ public class DashboardFragment extends BaseFragment {
             ProgressDialogHelper.ShowDialog(getActivity(), "", "Profile loading...");
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<UserProfileResponse> call = apiService.requestGetUserByName("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
+            Call<UserProfileResponse> call = apiService.requestGetUserByName("Bearer" + " " + session.fetchAuthToken(), "Rider", session.getUserDetails().get(SessionManager.KEY_MobileNumber));
             call.enqueue(new Callback<UserProfileResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<UserProfileResponse> call, @NonNull retrofit2.Response<UserProfileResponse> response) {
@@ -133,7 +133,7 @@ public class DashboardFragment extends BaseFragment {
                             if (response.body().getSucceeded()) {
                                 UserProfileData info = response.body().getUserProfileData();
                                 new ResponseModelDAO().addUserProfileResponseToDAO(info);
-                                //StoreUserDataToSharedPref();
+                                StoreUserDataToSharedPref();
 
                                 tvUserName.setText(info.getFirstName() + " " + info.getLastName());
                                 tvReferCode.setText(info.getReferralCode().toString());
@@ -165,7 +165,7 @@ public class DashboardFragment extends BaseFragment {
             SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
 
             ApiInterface apiService = ApiClient.getClient(getActivity().getApplicationContext()).create(ApiInterface.class);
-            Call<BalanceResponse> call = apiService.requestGetBalance("Bearer" + " " + session.fetchAuthToken(), "Rider", sendOTPData.getMobileNumber());
+            Call<BalanceResponse> call = apiService.requestGetBalance("Bearer" + " " + session.fetchAuthToken(), "Rider", session.getUserDetails().get(SessionManager.KEY_MobileNumber));
             call.enqueue(new Callback<BalanceResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<BalanceResponse> call, @NonNull retrofit2.Response<BalanceResponse> response) {

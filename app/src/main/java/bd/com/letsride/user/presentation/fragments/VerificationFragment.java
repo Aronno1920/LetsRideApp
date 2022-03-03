@@ -1,5 +1,6 @@
 package bd.com.letsride.user.presentation.fragments;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -73,7 +74,7 @@ public class VerificationFragment extends BaseFragment {
             public void onClick(View v) {
                 if(tvTimer.getText().toString().contains("Send again"))
                 {
-                    requestVerificationCode();
+                    requestVerificationCodeAgain();
                 }
             }
         });
@@ -109,6 +110,7 @@ public class VerificationFragment extends BaseFragment {
                             new ResponseModelDAO().addVerifyOTPResponseToDAO(myVerify);
 
                             session.saveAuthToken(myVerify.getToken());
+                            session.saveMobileNumber(sendOTPData.getCountryCode(),sendOTPData.getMobileNumber());
                             redirectedToHomeOrRegistrionPage(myVerify.getProfileUpdated());
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -129,7 +131,7 @@ public class VerificationFragment extends BaseFragment {
         }
     }
 
-    private void requestVerificationCode() {
+    private void requestVerificationCodeAgain() {
         if (UtilityClass.isNetworkAvailable(getActivity().getApplicationContext())) {
 
             ProgressDialogHelper.ShowDialog(getActivity(), "", "Sending verification code again...");
@@ -143,9 +145,13 @@ public class VerificationFragment extends BaseFragment {
                 public void onResponse(Call<SendOTPResponse> call, retrofit2.Response<SendOTPResponse> response) {
                     try {
                         if (response.body().getSucceeded()) {
-                            SendOTPData sendOTPData = new ResponseModelDAO().getSendOTPResponse();
+                            SendOTPData sendOTPData = response.body().getSendOTPData();
+
+                            new ResponseModelDAO().addSendOTPResponseToDAO(sendOTPData);
                             tvPrefix.setText(sendOTPData.getPrefix() + " - ");
                             StartTimer();
+
+                            Toast.makeText(getActivity().getApplicationContext(), sendOTPData.getPrefix(), Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getActivity().getApplicationContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -161,6 +167,7 @@ public class VerificationFragment extends BaseFragment {
                     Log.d("A1920:Error", t.getMessage());
                     ProgressDialogHelper.DismissDialog();
                 }
+
             });
         }
     }

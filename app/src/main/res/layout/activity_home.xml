@@ -21,6 +21,8 @@
             android:background="@color/colorWhite"
             app:itemIconTint="@color/colorMarron"
             app:itemTextColor="@color/colorMarron"
+            app:labelVisibilityMode="labeled"
+            app:itemBackground="@drawable/bottomnavigationselector"
             app:menu="@menu/bottom_nav_menu" />
     </FrameLayout>
 

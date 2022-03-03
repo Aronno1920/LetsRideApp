@@ -22,10 +22,12 @@ import bd.com.letsride.user.presentation.fragments.RoutesFragment;
 import bd.com.letsride.user.presentation.fragments.SettingFragment;
 import bd.com.letsride.user.utilities.BaseActivity;
 import bd.com.letsride.user.utilities.FragmentRouting;
+import bd.com.letsride.user.utilities.SessionManager;
 
 public class HomeActivity extends BaseActivity implements SettingFragment.OnSettingsFragmentInteraction, RoutesFragment.OnRouteFragmentInteraction {
 
     int whereToGo;
+    SessionManager session;
     SettingMenuModel settingMenuModel;
     BottomNavigationView bottomNavigationView;
     boolean doubleBackToExitPressedOnce = false;
@@ -34,59 +36,41 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        session = new SessionManager(getApplicationContext());
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        registerActions();
-
         loadFragment(new DashboardFragment());
+        registerActions();
     }
 
-//    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-//            new BottomNavigationView.OnNavigationItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                    switch (item.getItemId()) {
-//                        case R.id.home:
-//                            loadFragment(new DashboardFragment());
-//                            break;
-//                        case R.id.credit:
-//                            loadFragment(new CreditFragment());
-//                            break;
-//                        case R.id.routes:
-//                            loadFragment(new RoutesFragment());
-//                            break;
-//                        case R.id.settings:
-//                            loadFragment(new SettingFragment());
-//                            break;
-//                    }
-//                    return false;
-//                }
-//            };
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            HomeActivity.this.loadFragment(new DashboardFragment());
+                            break;
+                        case R.id.credit:
+                            HomeActivity.this.loadFragment(new CreditFragment());
+                            break;
+                        case R.id.bookride:
+                            HomeActivity.this.loadFragment(new RouteSelectorFragment());
+                            break;
+                        case R.id.routes:
+                            HomeActivity.this.loadFragment(new RoutesFragment());
+                            break;
+                        case R.id.settings:
+                            HomeActivity.this.loadFragment(new SettingFragment());
+                            break;
+                    }
+                    return false;
+                }
+            };
 
     private void registerActions() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        loadFragment(new DashboardFragment());
-                        break;
-                    case R.id.credit:
-                        loadFragment(new CreditFragment());
-                        break;
-                    case R.id.bookride:
-                        loadFragment(new RouteSelectorFragment());
-                        break;
-                    case R.id.routes:
-                        loadFragment(new RoutesFragment());
-                        break;
-                    case R.id.settings:
-                        loadFragment(new SettingFragment());
-                        break;
-                }
-                return false;
-            }
-        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        bottomNavigationView.getMenu().getItem(0).setEnabled(true);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -156,11 +140,12 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
                 //showToast("SUNDAY");
                 break;
             case 13: // Log out
-                //showToast("SUNDAY");
+                UserLogout();
                 break;
         }
     }
 
+    //region Methods of Settinge
     private void callCustomerCare() {
         String phone = "01821644177";
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
@@ -174,6 +159,17 @@ public class HomeActivity extends BaseActivity implements SettingFragment.OnSett
         callIntent.setData(Uri.parse("tel:" + phone));
         startActivity(callIntent);
     }
+
+    private void UserLogout(){
+        session.LogoutUser();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        this.finish();
+    }
+    //endregion
+
 
     @Override
     public void onRouteButtonClicked(int whereToGo) {

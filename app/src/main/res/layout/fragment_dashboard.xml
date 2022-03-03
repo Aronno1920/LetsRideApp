@@ -126,8 +126,8 @@
                     android:background="@drawable/style_package_selector"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/ic_daily">
                     </ImageView>
                     <TextView
@@ -145,8 +145,8 @@
                     android:layout_marginRight="3dp"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/ic_weekly">
                     </ImageView>
                     <TextView
@@ -163,8 +163,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:src="@drawable/ic_monthly">
                     </ImageView>
                     <TextView
@@ -266,14 +266,8 @@
                             android:textColor="@color/colorWhite"
                             android:text="Invite" />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@color/colorWhite"/>
     </LinearLayout>
 </ScrollView>
